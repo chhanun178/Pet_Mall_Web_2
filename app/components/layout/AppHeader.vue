@@ -19,8 +19,8 @@
 
         <!-- Navigation Links -->
         <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-stone-600">
-          <NuxtLink to="/products" class="hover:text-brand-600 transition-colors">Products</NuxtLink>
-          <NuxtLink to="/services" class="hover:text-brand-600 transition-colors">Services</NuxtLink>
+          <NuxtLink to="/products" class="transition-colors hover:text-brand-600" active-class="text-brand-600 font-bold">Products</NuxtLink>
+          <NuxtLink to="/services" class="transition-colors hover:text-brand-600" active-class="text-brand-600 font-bold">Services</NuxtLink>
         </nav>
       </div>
 
