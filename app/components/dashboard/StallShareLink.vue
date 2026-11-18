@@ -10,7 +10,7 @@
       </div>
       <div>
         <h2 class="text-sm font-bold text-stone-900 leading-tight">Stall Live Link</h2>
-        <p class="text-xs text-stone-400 font-mono mt-0.5">petmall.co/market/velvet-paws</p>
+        <p class="text-xs text-stone-400 mt-0.5">petmall.co/market/velvet-paws</p>
       </div>
     </div>
 

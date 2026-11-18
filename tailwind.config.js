@@ -5,6 +5,9 @@ export default {
     './app.vue',
   ],
   theme: {
+    fontFamily: {
+      sans: ['"Google Sans"', 'sans-serif'],
+    },
     extend: {
       colors: {
         brand: {
