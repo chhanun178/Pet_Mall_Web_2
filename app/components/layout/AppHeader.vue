@@ -34,17 +34,13 @@
           <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full ring-2 ring-white"></span>
         </button>
 
-        <!-- Merchant Profile Pill -->
-        <div class="flex items-center gap-3 pl-2 sm:pl-3 border-l border-warm-200">
-          <div class="w-9 h-9 rounded-full bg-amber-800 text-amber-100 flex items-center justify-center font-bold text-sm ring-2 ring-warm-200">
+        <!-- Merchant Profile Avatar -->
+        <div class="flex items-center pl-2 sm:pl-3 border-l border-warm-200">
+          <div
+            class="w-9 h-9 rounded-full bg-amber-800 text-amber-100 flex items-center justify-center font-bold text-sm ring-2 ring-warm-200 hover:ring-brand-500 transition-all cursor-pointer"
+            title="Artisan Paws Co. • Verified Merchant"
+          >
             AP
-          </div>
-          <div class="hidden sm:block text-left">
-            <div class="text-xs font-bold text-stone-900 leading-tight">Artisan Paws Co.</div>
-            <div class="text-[11px] font-medium text-stone-500 flex items-center gap-1">
-              <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-              Verified Merchant
-            </div>
           </div>
         </div>
       </div>
