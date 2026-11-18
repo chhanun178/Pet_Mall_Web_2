@@ -42,8 +42,9 @@
     <!-- Quick Action Buttons -->
     <div class="flex items-center gap-3 shrink-0">
       <!-- Add New Product Button -->
-      <NuxtLink
-        to="/products?action=new-product"
+      <button
+        type="button"
+        @click="openAddProduct"
         class="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl border border-[#D5E6FF] bg-[#F5F9FF] hover:bg-[#EBF3FF] text-[#1D68E2] text-sm font-semibold transition-all shadow-sm active:scale-95 cursor-pointer"
       >
         <svg class="w-4 h-4 text-[#1D68E2]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -51,18 +52,25 @@
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v8m-4-4h8"/>
         </svg>
         <span>Add New Product</span>
-      </NuxtLink>
+      </button>
 
       <!-- Add Service Button -->
-      <NuxtLink
-        to="/products?action=new-service"
+      <button
+        type="button"
+        @click="openAddService"
         class="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-[#F58700] hover:bg-[#E07A00] text-white text-sm font-semibold transition-all shadow-sm active:scale-95 cursor-pointer"
       >
         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
         </svg>
         <span>Add Service</span>
-      </NuxtLink>
+      </button>
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import { useProducts } from '~/composables/useProducts'
+
+const { openAddProduct, openAddService } = useProducts()
+</script>

@@ -1,9 +1,9 @@
 <template>
-  <div v-if="isOpen">
+  <div v-if="isDrawerOpen">
     <!-- Backdrop -->
     <div
-      class="fixed inset-0 bg-stone-900/40 backdrop-blur-[2px] z-50 transition-opacity"
-      @click="$emit('close')"
+      class="fixed inset-0 bg-stone-900/50 backdrop-blur-[2px] z-50 transition-opacity"
+      @click="closeDrawer"
     ></div>
 
     <!-- Slide-over Panel -->
@@ -13,17 +13,17 @@
         <div class="p-6 border-b border-warm-200/80 flex items-center justify-between">
           <div class="flex items-center gap-2.5">
             <span
-              class="w-2.5 h-2.5 rounded-full"
-              :class="mode === 'service' ? 'bg-blue-500' : 'bg-[#F58700]'"
+              class="w-3 h-3 rounded-full"
+              :class="drawerMode === 'service' ? 'bg-blue-500' : 'bg-[#F58700]'"
             ></span>
             <h2 class="text-lg font-bold text-stone-900">
-              {{ mode === 'service' ? 'Add a new service' : 'Add a new product' }}
+              {{ drawerMode === 'service' ? 'Add a new service' : 'Add a new product' }}
             </h2>
           </div>
           <button
-            @click="$emit('close')"
+            @click="closeDrawer"
             type="button"
-            class="w-8 h-8 rounded-lg flex items-center justify-center text-stone-400 hover:text-stone-700 hover:bg-stone-100 transition-colors"
+            class="w-8 h-8 rounded-lg flex items-center justify-center text-stone-400 hover:text-stone-700 hover:bg-stone-100 transition-colors cursor-pointer"
           >
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
@@ -32,7 +32,7 @@
         </div>
 
         <!-- Form Content -->
-        <form @submit.prevent="handleSave" class="p-6 space-y-6 text-xs sm:text-sm">
+        <div class="p-6 space-y-6 text-xs sm:text-sm">
           <!-- 1. Basic Information -->
           <div class="space-y-4">
             <h3 class="font-bold text-stone-900 text-sm">Basic Information</h3>
@@ -40,13 +40,12 @@
             <!-- Title / Name -->
             <div class="space-y-1.5">
               <label class="block text-xs font-semibold text-stone-600">
-                {{ mode === 'service' ? 'Service Title' : 'Product Title' }}
+                {{ drawerMode === 'service' ? 'Service Title' : 'Product Title' }}
               </label>
               <input
                 type="text"
                 v-model="form.title"
-                required
-                :placeholder="mode === 'service' ? 'e.g. Herbal Paw Soak & Relax' : 'e.g. Organic Chamomile Paw Balm'"
+                :placeholder="drawerMode === 'service' ? 'e.g. Herbal Paw Soak & Relax' : 'e.g. Organic Chamomile Paw Balm'"
                 class="w-full px-3.5 py-2.5 rounded-xl border border-warm-200 text-stone-800 text-xs sm:text-sm focus:outline-none focus:border-brand-500 shadow-sm"
               />
             </div>
@@ -54,7 +53,7 @@
             <!-- Description -->
             <div class="space-y-1.5">
               <label class="block text-xs font-semibold text-stone-600">
-                {{ mode === 'service' ? 'Service Description' : 'Product Description' }}
+                {{ drawerMode === 'service' ? 'Service Description' : 'Product Description' }}
               </label>
               <textarea
                 v-model="form.description"
@@ -73,7 +72,7 @@
                     v-model="form.category"
                     class="w-full appearance-none px-3.5 py-2.5 rounded-xl border border-warm-200 text-stone-800 text-xs sm:text-sm focus:outline-none focus:border-brand-500 shadow-sm pr-8 bg-white cursor-pointer font-medium"
                   >
-                    <template v-if="mode === 'product'">
+                    <template v-if="drawerMode === 'product'">
                       <option>Topical Balms</option>
                       <option>Ear Care</option>
                       <option>Supplements</option>
@@ -96,7 +95,7 @@
               </div>
 
               <!-- Product: Pet Type | Service: Duration -->
-              <div v-if="mode === 'product'" class="space-y-1.5">
+              <div v-if="drawerMode === 'product'" class="space-y-1.5">
                 <label class="block text-xs font-semibold text-stone-600">Pet Type</label>
                 <div class="relative">
                   <select
@@ -130,13 +129,13 @@
           <!-- 2. Pricing & Inventory -->
           <div class="space-y-4 pt-4 border-t border-warm-100">
             <h3 class="font-bold text-stone-900 text-sm">
-              {{ mode === 'service' ? 'Pricing & Availability' : 'Pricing & Inventory' }}
+              {{ drawerMode === 'service' ? 'Pricing & Availability' : 'Pricing & Inventory' }}
             </h3>
 
             <div class="grid grid-cols-2 gap-3">
               <div class="space-y-1.5">
                 <label class="block text-xs font-semibold text-stone-600">
-                  {{ mode === 'service' ? 'Session Price' : 'Retail Price' }}
+                  {{ drawerMode === 'service' ? 'Session Price' : 'Retail Price' }}
                 </label>
                 <div class="relative">
                   <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-stone-400 text-xs">$</span>
@@ -145,7 +144,6 @@
                     v-model.number="form.retailPrice"
                     min="1"
                     step="0.5"
-                    required
                     class="w-full pl-7 pr-3 py-2.5 rounded-xl border border-warm-200 text-stone-800 text-xs sm:text-sm focus:outline-none focus:border-brand-500 shadow-sm"
                   />
                 </div>
@@ -153,7 +151,7 @@
 
               <div class="space-y-1.5">
                 <label class="block text-xs font-semibold text-stone-600">
-                  {{ mode === 'service' ? 'Material / Cost' : 'Item Cost' }}
+                  {{ drawerMode === 'service' ? 'Material / Cost' : 'Item Cost' }}
                 </label>
                 <div class="relative">
                   <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-stone-400 text-xs">$</span>
@@ -177,7 +175,7 @@
             <!-- Stock or Slots -->
             <div class="space-y-1.5">
               <label class="block text-xs font-semibold text-stone-600">
-                {{ mode === 'service' ? 'Weekly Available Slots' : 'Stock Quantity' }}
+                {{ drawerMode === 'service' ? 'Weekly Available Slots' : 'Stock Quantity' }}
               </label>
               <div class="relative">
                 <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-stone-400">
@@ -190,7 +188,6 @@
                   type="number"
                   v-model.number="form.stock"
                   min="1"
-                  required
                   class="w-full pl-9 pr-3 py-2.5 rounded-xl border border-warm-200 text-stone-800 text-xs sm:text-sm focus:outline-none focus:border-brand-500 shadow-sm"
                 />
               </div>
@@ -209,24 +206,25 @@
               <span class="text-xs text-stone-500 font-medium">Click to upload image or photo</span>
             </div>
           </div>
+        </div>
+      </div>
 
-          <!-- Drawer Footer inside form -->
-          <div class="pt-5 border-t border-warm-200 flex items-center justify-end gap-3 bg-white">
-            <button
-              type="button"
-              @click="$emit('close')"
-              class="px-4 py-2 text-xs sm:text-sm font-semibold text-stone-600 hover:text-stone-900 transition-colors cursor-pointer"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              class="px-5 py-2.5 rounded-xl bg-[#F58700] hover:bg-[#E07A00] text-white text-xs sm:text-sm font-bold transition-all shadow-sm active:scale-95 cursor-pointer"
-            >
-              {{ mode === 'service' ? 'Save Service' : 'Save Product' }}
-            </button>
-          </div>
-        </form>
+      <!-- Drawer Footer -->
+      <div class="p-5 border-t border-warm-200 flex items-center justify-end gap-3 bg-white">
+        <button
+          type="button"
+          @click="closeDrawer"
+          class="px-4 py-2.5 text-xs sm:text-sm font-semibold text-stone-600 hover:text-stone-900 transition-colors cursor-pointer"
+        >
+          Cancel
+        </button>
+        <button
+          type="button"
+          @click="handleSave"
+          class="px-6 py-2.5 rounded-xl bg-[#F58700] hover:bg-[#E07A00] active:scale-95 text-white text-xs sm:text-sm font-bold transition-all shadow-sm cursor-pointer"
+        >
+          {{ drawerMode === 'service' ? 'Save Service' : 'Save Product' }}
+        </button>
       </div>
     </aside>
   </div>
@@ -236,54 +234,50 @@
 import { ref, computed, watch } from 'vue'
 import { useProducts } from '~/composables/useProducts'
 
-const props = withDefaults(defineProps<{
-  isOpen: boolean
-  mode?: 'product' | 'service'
-  editItem?: any
-}>(), {
-  mode: 'product',
-  editItem: null
-})
-
-const emit = defineEmits<{
-  (e: 'close'): void
-  (e: 'saved'): void
-}>()
-
-const { addItem } = useProducts()
+const { isDrawerOpen, drawerMode, editingItem, closeDrawer, addItem } = useProducts()
 
 const form = ref({
-  title: '',
-  description: '',
+  title: 'Chamomile & Oat Soothing Paw Balm',
+  description: 'Crafted in small batches using whole organic chamomile flower extract and finely ground colloidal oat groats. Deeply nourishing for cracked pads and dry noses.',
   category: 'Topical Balms',
   petType: 'All Pets',
   duration: '45 min private session',
-  retailPrice: 20,
-  itemCost: 5,
-  stock: 25,
+  retailPrice: 18,
+  itemCost: 4.5,
+  stock: 35,
 })
 
-// Populate form when opened or mode changed
-watch(() => props.isOpen, (open) => {
-  if (open) {
-    if (props.editItem) {
-      form.value.title = props.editItem.name
-      form.value.retailPrice = props.editItem.numericPrice || 20
-      form.value.category = props.mode === 'service' ? 'Spa & Grooming' : 'Topical Balms'
-      form.value.stock = 30
-    } else {
-      form.value.title = props.mode === 'service' ? 'Canine Herbal Coat & Spa Ritual' : 'Botanical Paw Protection Balm'
-      form.value.description = props.mode === 'service'
-        ? 'Holistic consultation and soothing coat soak using certified organic tinctures and calm lavender.'
-        : 'Organic cold-pressed butter and calendula extract for cracked paws, dry noses, and active pads.'
-      form.value.category = props.mode === 'service' ? 'Spa & Grooming' : 'Topical Balms'
-      form.value.duration = '45 min private session'
-      form.value.retailPrice = props.mode === 'service' ? 75 : 22
-      form.value.itemCost = props.mode === 'service' ? 8 : 4.5
-      form.value.stock = props.mode === 'service' ? 12 : 35
+// Populate form whenever drawer opens or mode changes
+watch(
+  [isDrawerOpen, drawerMode, editingItem],
+  ([open, mode, item]) => {
+    if (open) {
+      if (item) {
+        form.value.title = item.name
+        form.value.retailPrice = item.numericPrice || 20
+        form.value.category = mode === 'service' ? 'Spa & Grooming' : 'Topical Balms'
+        form.value.stock = 25
+      } else if (mode === 'service') {
+        form.value.title = 'Canine Herbal Coat & Spa Ritual'
+        form.value.description = 'Holistic consultation and soothing coat soak using certified organic tinctures and calm lavender.'
+        form.value.category = 'Spa & Grooming'
+        form.value.duration = '45 min private session'
+        form.value.retailPrice = 75
+        form.value.itemCost = 8
+        form.value.stock = 12
+      } else {
+        form.value.title = 'Botanical Paw Protection Balm'
+        form.value.description = 'Organic cold-pressed butter and calendula extract for cracked paws, dry noses, and active pads.'
+        form.value.category = 'Topical Balms'
+        form.value.petType = 'All Pets'
+        form.value.retailPrice = 22
+        form.value.itemCost = 4.5
+        form.value.stock = 35
+      }
     }
-  }
-})
+  },
+  { immediate: true }
+)
 
 const marginPct = computed(() => {
   if (!form.value.retailPrice || form.value.retailPrice <= 0) return '0.00%'
@@ -305,15 +299,20 @@ const sampleImages = [
 ]
 
 const handleSave = () => {
-  if (props.mode === 'service') {
+  const title = form.value.title.trim() || (drawerMode.value === 'service' ? 'New Holistic Service' : 'New Artisan Product')
+  const price = Math.max(1, form.value.retailPrice || 15)
+  const cost = Math.max(0, form.value.itemCost || 0)
+  const stockCount = Math.max(1, form.value.stock || 10)
+
+  if (drawerMode.value === 'service') {
     addItem({
-      name: form.value.title,
+      name: title,
       variantSubtitle: form.value.duration || '45 min private session',
       type: 'Service',
-      price: `$${Number(form.value.retailPrice).toFixed(2)}`,
-      numericPrice: Number(form.value.retailPrice),
+      price: `$${price.toFixed(2)}`,
+      numericPrice: price,
       margin: `${marginPct.value} margin`,
-      stock: `${form.value.stock} slots this week`,
+      stock: `${stockCount} slots this week`,
       stockColor: 'text-blue-700',
       dotColor: 'bg-blue-500',
       isActive: true,
@@ -322,21 +321,20 @@ const handleSave = () => {
   } else {
     const randomImage = sampleImages[Math.floor(Math.random() * sampleImages.length)]
     addItem({
-      name: form.value.title,
+      name: title,
       variantSubtitle: '1 variant',
       type: 'Product',
-      price: `$${Number(form.value.retailPrice).toFixed(2)}`,
-      numericPrice: Number(form.value.retailPrice),
-      margin: `${marginPct.value} margin ($${Number(form.value.itemCost).toFixed(2)} cost)`,
-      stock: `${form.value.stock} units in stock`,
-      stockColor: Number(form.value.stock) <= 5 ? 'text-rose-600' : 'text-stone-700',
-      dotColor: Number(form.value.stock) <= 5 ? 'bg-rose-500' : 'bg-emerald-500',
+      price: `$${price.toFixed(2)}`,
+      numericPrice: price,
+      margin: `${marginPct.value} margin ($${cost.toFixed(2)} cost)`,
+      stock: `${stockCount} units in stock`,
+      stockColor: stockCount <= 5 ? 'text-rose-600' : 'text-stone-700',
+      dotColor: stockCount <= 5 ? 'bg-rose-500' : 'bg-emerald-500',
       isActive: true,
       image: randomImage
     })
   }
 
-  emit('saved')
-  emit('close')
+  closeDrawer()
 }
 </script>

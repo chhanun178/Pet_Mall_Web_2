@@ -1,5 +1,3 @@
-import { ref } from 'vue'
-
 export interface InventoryItem {
   id: number
   name: string
@@ -15,7 +13,7 @@ export interface InventoryItem {
   image: string | null
 }
 
-const items = ref<InventoryItem[]>([
+const defaultItems: InventoryItem[] = [
   {
     id: 1,
     name: 'Chamomile & Oat Soothing Paw Balm (60ml)',
@@ -86,19 +84,63 @@ const items = ref<InventoryItem[]>([
     isActive: true,
     image: null,
   },
-])
+]
 
 export const useProducts = () => {
+  // Global Nuxt state: persists across hydration and shared between all pages and components
+  const items = useState<InventoryItem[]>('global_inventory_items', () => defaultItems)
+  const isDrawerOpen = useState<boolean>('global_product_drawer_open', () => false)
+  const drawerMode = useState<'product' | 'service'>('global_drawer_mode', () => 'product')
+  const editingItem = useState<InventoryItem | null>('global_editing_item', () => null)
+  const toastMessage = useState<string>('global_toast_message', () => '')
+
+  const showToast = (msg: string) => {
+    toastMessage.value = msg
+    setTimeout(() => {
+      if (toastMessage.value === msg) {
+        toastMessage.value = ''
+      }
+    }, 3500)
+  }
+
+  const openAddProduct = () => {
+    editingItem.value = null
+    drawerMode.value = 'product'
+    isDrawerOpen.value = true
+  }
+
+  const openAddService = () => {
+    editingItem.value = null
+    drawerMode.value = 'service'
+    isDrawerOpen.value = true
+  }
+
+  const openEdit = (item: InventoryItem) => {
+    editingItem.value = item
+    drawerMode.value = item.type === 'Service' ? 'service' : 'product'
+    isDrawerOpen.value = true
+  }
+
+  const closeDrawer = () => {
+    isDrawerOpen.value = false
+    editingItem.value = null
+  }
+
   const addItem = (item: Omit<InventoryItem, 'id'>) => {
     const nextId = items.value.length ? Math.max(...items.value.map(i => i.id)) + 1 : 1
     items.value.unshift({
       ...item,
       id: nextId
     })
+    showToast(`Successfully added "${item.name}"!`)
   }
 
   const deleteItem = (id: number) => {
+    const target = items.value.find(i => i.id === id)
     items.value = items.value.filter(i => i.id !== id)
+    if (target) {
+      showToast(`Removed "${target.name}"`)
+    }
   }
 
   const duplicateItem = (id: number) => {
@@ -110,13 +152,23 @@ export const useProducts = () => {
         id: nextId,
         name: `${target.name} (Copy)`
       })
+      showToast(`Duplicated "${target.name}"`)
     }
   }
 
   return {
     items,
+    isDrawerOpen,
+    drawerMode,
+    editingItem,
+    toastMessage,
+    openAddProduct,
+    openAddService,
+    openEdit,
+    closeDrawer,
     addItem,
     deleteItem,
-    duplicateItem
+    duplicateItem,
+    showToast
   }
 }

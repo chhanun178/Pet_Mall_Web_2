@@ -92,7 +92,7 @@
                 <!-- Edit -->
                 <button
                   type="button"
-                  @click="$emit('edit-item', item)"
+                  @click="openEdit(item)"
                   class="p-1 hover:text-stone-700 transition-colors"
                   title="Edit item"
                 >
@@ -132,11 +132,7 @@
 </template>
 
 <script setup lang="ts">
-import { useProducts, type InventoryItem } from '~/composables/useProducts'
+import { useProducts } from '~/composables/useProducts'
 
-defineEmits<{
-  (e: 'edit-item', item: InventoryItem): void
-}>()
-
-const { items, deleteItem, duplicateItem } = useProducts()
+const { items, deleteItem, duplicateItem, openEdit } = useProducts()
 </script>

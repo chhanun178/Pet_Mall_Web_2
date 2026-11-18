@@ -29,7 +29,7 @@
       <div class="flex items-center gap-3 shrink-0">
         <!-- Add New Product Button -->
         <button
-          @click="$emit('add-product')"
+          @click="openAddProduct"
           type="button"
           class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-blue-200 bg-blue-50/50 hover:bg-blue-100 text-blue-600 text-xs sm:text-sm font-semibold transition-all shadow-sm active:scale-95 cursor-pointer"
         >
@@ -42,7 +42,7 @@
 
         <!-- Add New Service Button -->
         <button
-          @click="$emit('add-service')"
+          @click="openAddService"
           type="button"
           class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-blue-200 bg-blue-50/50 hover:bg-blue-100 text-blue-600 text-xs sm:text-sm font-semibold transition-all shadow-sm active:scale-95 cursor-pointer"
         >
@@ -58,8 +58,7 @@
 </template>
 
 <script setup lang="ts">
-defineEmits<{
-  (e: 'add-product'): void
-  (e: 'add-service'): void
-}>()
+import { useProducts } from '~/composables/useProducts'
+
+const { openAddProduct, openAddService } = useProducts()
 </script>
