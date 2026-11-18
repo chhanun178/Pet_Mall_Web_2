@@ -19,6 +19,8 @@
           v-if="isDrawerOpen"
           class="pointer-events-auto fixed inset-0 bg-stone-900/40 backdrop-blur-sm"
           @click="closeDrawer"
+          @wheel.prevent
+          @touchmove.prevent
         />
       </Transition>
 
@@ -267,10 +269,34 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, onUnmounted } from 'vue'
 import { useProducts } from '~/composables/useProducts'
 
 const { isDrawerOpen, drawerMode, editingItem, closeDrawer, addItem } = useProducts()
+
+// Lock background scrolling while drawer is open
+watch(
+  isDrawerOpen,
+  (open) => {
+    if (import.meta.client) {
+      if (open) {
+        document.documentElement.classList.add('overflow-hidden')
+        document.body.classList.add('overflow-hidden')
+      } else {
+        document.documentElement.classList.remove('overflow-hidden')
+        document.body.classList.remove('overflow-hidden')
+      }
+    }
+  },
+  { immediate: true }
+)
+
+onUnmounted(() => {
+  if (import.meta.client) {
+    document.documentElement.classList.remove('overflow-hidden')
+    document.body.classList.remove('overflow-hidden')
+  }
+})
 
 const form = ref({
   title: 'Chamomile & Oat Soothing Paw Balm',
