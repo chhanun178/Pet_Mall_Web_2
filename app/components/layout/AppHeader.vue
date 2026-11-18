@@ -2,7 +2,7 @@
   <header class="sticky top-0 z-40 h-16 box-border bg-white border-b border-warm-200/80 will-change-transform transform-gpu">
     <div class="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
       <!-- Left: Logo -->
-      <div class="flex items-center gap-8">
+      <div class="flex items-center">
         <NuxtLink to="/" class="flex items-center gap-2 group">
           <div class="w-8 h-8 rounded-lg bg-brand-500/10 flex items-center justify-center text-brand-600 font-bold group-hover:bg-brand-500 group-hover:text-white transition-colors">
             <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
@@ -16,12 +16,6 @@
           </div>
           <span class="text-xl font-bold tracking-tight text-stone-900">Pet<span class="text-brand-600">Mall</span></span>
         </NuxtLink>
-
-        <!-- Navigation Links -->
-        <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-stone-600">
-          <NuxtLink to="/products" class="transition-colors hover:text-brand-600" active-class="text-brand-600 font-bold">Products</NuxtLink>
-          <NuxtLink to="/services" class="transition-colors hover:text-brand-600" active-class="text-brand-600 font-bold">Services</NuxtLink>
-        </nav>
       </div>
 
       <!-- Right Actions: Notifications & Merchant Badge -->
