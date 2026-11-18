@@ -1,37 +1,36 @@
 <template>
   <Teleport to="body">
     <div
-      v-show="isDrawerOpen"
-      class="relative z-50"
+      class="relative z-50 pointer-events-none"
       aria-labelledby="drawer-title"
       role="dialog"
       aria-modal="true"
     >
-      <!-- Backdrop Transition -->
+      <!-- Backdrop Transition (smooth fade in & fade out) -->
       <Transition
         enter-active-class="transition-opacity ease-out duration-300"
         enter-from-class="opacity-0"
         enter-to-class="opacity-100"
-        leave-active-class="transition-opacity ease-in duration-200"
+        leave-active-class="transition-opacity ease-in duration-300"
         leave-from-class="opacity-100"
         leave-to-class="opacity-0"
       >
         <div
           v-if="isDrawerOpen"
-          class="fixed inset-0 bg-stone-900/40 backdrop-blur-sm"
+          class="pointer-events-auto fixed inset-0 bg-stone-900/40 backdrop-blur-sm"
           @click="closeDrawer"
         />
       </Transition>
 
-      <!-- Slide-over Drawer Transition -->
+      <!-- Slide-over Drawer Transition (smooth slide in & slide back out) -->
       <div class="fixed inset-0 overflow-hidden pointer-events-none">
         <div class="absolute inset-0 overflow-hidden">
           <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
             <Transition
-              enter-active-class="transform transition ease-out duration-400 sm:duration-500"
+              enter-active-class="transform transition ease-out duration-300 sm:duration-400"
               enter-from-class="translate-x-full"
               enter-to-class="translate-x-0"
-              leave-active-class="transform transition ease-in duration-300"
+              leave-active-class="transform transition ease-in duration-300 sm:duration-400"
               leave-from-class="translate-x-0"
               leave-to-class="translate-x-full"
             >
