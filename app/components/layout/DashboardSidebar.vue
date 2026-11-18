@@ -1,6 +1,6 @@
 <template>
   <aside
-    class="w-52 shrink-0 hidden md:flex flex-col justify-between sticky top-16 h-[calc(100vh-4rem)] border-r border-warm-200/90 py-6 pr-4 self-start select-none"
+    class="w-52 shrink-0 hidden md:flex flex-col justify-between sticky top-16 h-[calc(100vh-4rem)] border-r border-warm-200/90 py-6 pr-4 self-start select-none will-change-transform transform-gpu"
   >
     <!-- Menu items -->
     <nav class="space-y-1">
