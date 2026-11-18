@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-5 mt-6">
+  <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-5">
     <!-- Card 1: Today's Sales -->
     <div class="bg-white rounded-2xl border border-warm-200/90 p-5 shadow-card hover:shadow-card-hover transition-all">
       <div class="flex items-center justify-between">
