@@ -31,7 +31,7 @@
         <button
           @click="$emit('add-product')"
           type="button"
-          class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-blue-200 bg-blue-50/50 hover:bg-blue-100 text-blue-600 text-xs sm:text-sm font-semibold transition-all shadow-sm active:scale-95"
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-blue-200 bg-blue-50/50 hover:bg-blue-100 text-blue-600 text-xs sm:text-sm font-semibold transition-all shadow-sm active:scale-95 cursor-pointer"
         >
           <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <circle cx="12" cy="12" r="9"/>
@@ -42,8 +42,9 @@
 
         <!-- Add New Service Button -->
         <button
+          @click="$emit('add-service')"
           type="button"
-          class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-blue-200 bg-blue-50/50 hover:bg-blue-100 text-blue-600 text-xs sm:text-sm font-semibold transition-all shadow-sm active:scale-95"
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-blue-200 bg-blue-50/50 hover:bg-blue-100 text-blue-600 text-xs sm:text-sm font-semibold transition-all shadow-sm active:scale-95 cursor-pointer"
         >
           <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <circle cx="12" cy="12" r="9"/>
@@ -59,5 +60,6 @@
 <script setup lang="ts">
 defineEmits<{
   (e: 'add-product'): void
+  (e: 'add-service'): void
 }>()
 </script>
