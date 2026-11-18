@@ -4,12 +4,12 @@
     <LayoutAppHeader />
 
     <!-- Main App Body with Sidebar & Content -->
-    <div class="flex-1 max-w-[1600px] w-full mx-auto pl-4 pr-4 sm:pr-6 lg:pr-8 flex relative items-start">
+    <div class="flex-1 max-w-[1600px] w-full mx-auto px-4 flex relative items-start">
       <!-- Left Navigation Sidebar -->
       <LayoutDashboardSidebar />
 
       <!-- Main Page Content -->
-      <main class="flex-1 min-w-0 py-6 pl-0 md:pl-6 lg:pl-8">
+      <main class="flex-1 min-w-0 py-6 pl-0 md:pl-4">
         <slot />
       </main>
     </div>

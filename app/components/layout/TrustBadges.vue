@@ -1,6 +1,6 @@
 <template>
   <div class="border-t border-b border-warm-200 bg-white py-6">
-    <div class="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-[1600px] mx-auto px-4">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <!-- Feature 1 -->
         <div class="flex items-center gap-3.5">

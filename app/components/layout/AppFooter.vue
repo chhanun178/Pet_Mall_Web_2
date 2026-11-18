@@ -1,6 +1,6 @@
 <template>
   <footer class="bg-petdark text-stone-300 pt-14 pb-8">
-    <div class="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-[1600px] mx-auto px-4">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-stone-800">
         <!-- Col 1: Brand Info (Spans 2 cols) -->
         <div class="lg:col-span-2 space-y-4">
