@@ -1,5 +1,5 @@
 <template>
-  <header class="sticky top-0 z-40 h-16 box-border bg-white border-b border-warm-200/80 will-change-transform transform-gpu">
+  <header class="sticky top-0 z-50 h-16 box-border bg-white border-b border-warm-200/80 will-change-transform transform-gpu">
     <div class="max-w-[1600px] mx-auto px-4 h-full flex items-center justify-between">
       <!-- Left: Logo -->
       <div class="flex items-center">

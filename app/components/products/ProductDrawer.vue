@@ -1,24 +1,24 @@
 <template>
   <Teleport to="body">
-    <div class="relative z-50 pointer-events-none" aria-labelledby="drawer-title" role="dialog" aria-modal="true">
+    <div class="relative z-40 pointer-events-none" aria-labelledby="drawer-title" role="dialog" aria-modal="true">
       <!-- Backdrop Transition (smooth fade in & fade out) -->
       <Transition enter-active-class="transition-opacity ease-out duration-300" enter-from-class="opacity-0"
         enter-to-class="opacity-100" leave-active-class="transition-opacity ease-in duration-300"
         leave-from-class="opacity-100" leave-to-class="opacity-0">
-        <div v-if="isDrawerOpen" class="pointer-events-auto fixed inset-0 bg-stone-900/40 backdrop-blur-sm"
+        <div v-if="isDrawerOpen" class="pointer-events-auto fixed top-16 inset-x-0 bottom-0 bg-stone-900/40 backdrop-blur-sm"
           @click="closeDrawer" @wheel.prevent @touchmove.prevent />
       </Transition>
 
       <!-- Slide-over Drawer Transition (smooth slide in & slide back out) -->
-      <div class="fixed inset-0 overflow-hidden pointer-events-none">
+      <div class="fixed top-16 inset-x-0 bottom-0 overflow-hidden pointer-events-none">
         <div class="absolute inset-0 overflow-hidden">
-          <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+          <div class="pointer-events-none fixed top-16 bottom-0 right-0 flex max-w-full pl-10">
             <Transition enter-active-class="transform transition ease-out duration-300 sm:duration-400"
               enter-from-class="translate-x-full" enter-to-class="translate-x-0"
               leave-active-class="transform transition ease-in duration-300 sm:duration-400"
               leave-from-class="translate-x-0" leave-to-class="translate-x-full">
               <aside v-if="isDrawerOpen"
-                class="pointer-events-auto w-screen max-w-md bg-white shadow-2xl border-l border-warm-200 flex flex-col justify-between overflow-y-auto">
+                class="pointer-events-auto w-screen max-w-md bg-white shadow-2xl border-l border-warm-200 flex flex-col justify-between overflow-y-auto h-full">
                 <div>
                   <!-- Drawer Header -->
                   <div
