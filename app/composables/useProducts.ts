@@ -16,6 +16,20 @@ export interface InventoryItem {
 const defaultItems: InventoryItem[] = [
   {
     id: 1,
+    name: 'Botanical Paw Protection Balm',
+    variantSubtitle: '1 variant',
+    type: 'Product',
+    price: '$22.00',
+    numericPrice: 22,
+    margin: '79.55% margin ($4.50 cost)',
+    stock: '35 units in stock',
+    stockColor: 'text-stone-700',
+    dotColor: 'bg-emerald-500',
+    isActive: true,
+    image: 'https://images.unsplash.com/photo-1544816155-12df9643f363?w=100&auto=format&fit=crop&q=80',
+  },
+  {
+    id: 2,
     name: 'Chamomile & Oat Soothing Paw Balm (60ml)',
     variantSubtitle: '3 size options',
     type: 'Product',
@@ -29,7 +43,7 @@ const defaultItems: InventoryItem[] = [
     image: 'https://images.unsplash.com/photo-1608248597359-2ffb91a9f02c?w=100&auto=format&fit=crop&q=80',
   },
   {
-    id: 2,
+    id: 3,
     name: 'Organic Lavender Calming Dropper (30ml)',
     variantSubtitle: '2 flavor variants',
     type: 'Product',
@@ -43,7 +57,7 @@ const defaultItems: InventoryItem[] = [
     image: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=100&auto=format&fit=crop&q=80',
   },
   {
-    id: 3,
+    id: 4,
     name: 'Probiotic Skin & Coat Chewables (90ct)',
     variantSubtitle: '1 variant',
     type: 'Product',
@@ -57,7 +71,7 @@ const defaultItems: InventoryItem[] = [
     image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=100&auto=format&fit=crop&q=80',
   },
   {
-    id: 4,
+    id: 5,
     name: 'Herbal Ear Rinse & Botanical Dropper',
     variantSubtitle: '2 size options',
     type: 'Product',
@@ -71,7 +85,7 @@ const defaultItems: InventoryItem[] = [
     image: 'https://images.unsplash.com/photo-1576201836106-db1758fd1c97?w=100&auto=format&fit=crop&q=80',
   },
   {
-    id: 5,
+    id: 6,
     name: 'Holistic Canine Acupressure Consultation',
     variantSubtitle: '60 min private session',
     type: 'Service',

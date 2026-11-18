@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-3 text-xs text-stone-500">
     <div>
-      Showing <span class="font-bold text-stone-800">1-5</span> of <span class="font-bold text-stone-800">28</span> items
+      Showing <span class="font-bold text-stone-800">1-{{ items.length }}</span> of <span class="font-bold text-stone-800">{{ 23 + items.length }}</span> items
     </div>
 
     <div class="flex items-center gap-1">
@@ -34,3 +34,9 @@
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import { useProducts } from '~/composables/useProducts'
+
+const { items } = useProducts()
+</script>
