@@ -1,5 +1,11 @@
 export default defineNuxtConfig({
+  compatibilityDate: '2026-11-18',
   modules: ['@nuxtjs/tailwindcss'],
+  postcss: {
+    plugins: {
+      'tailwindcss/nesting': false,
+    },
+  },
   app: {
     head: {
       link: [

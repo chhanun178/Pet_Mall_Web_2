@@ -10,10 +10,6 @@
   font-family: 'Google Sans', sans-serif;
 }
 
-html {
-  scrollbar-gutter: stable;
-}
-
 html,
 body,
 button,
@@ -33,18 +29,24 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Smooth sleek scrollbar */
+/* Hide scrollbar slider for the page across all browsers while keeping content scrollable */
+html,
+body {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  display: none; /* Chrome, Safari and Edge */
+  width: 0;
+  height: 0;
 }
-::-webkit-scrollbar-track {
-  background: transparent;
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
-::-webkit-scrollbar-thumb {
-  background: #E7E5E4;
-  border-radius: 9999px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #D6D3D1;
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
