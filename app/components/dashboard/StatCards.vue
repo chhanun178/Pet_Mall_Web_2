@@ -14,12 +14,6 @@
       </div>
       <div class="mt-3">
         <div class="text-2xl sm:text-3xl font-extrabold tracking-tight text-stone-900">$1,420.50</div>
-        <div class="mt-2 flex items-center gap-1.5 text-xs">
-          <span class="inline-flex items-center font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded">
-            ↑ +14.2%
-          </span>
-          <span class="text-stone-500 font-medium">vs. yesterday ($1,244.00)</span>
-        </div>
       </div>
     </div>
 
@@ -35,13 +29,6 @@
       </div>
       <div class="mt-3">
         <div class="text-2xl sm:text-3xl font-extrabold tracking-tight text-stone-900">18</div>
-        <div class="mt-2 flex items-center gap-1.5 text-xs font-medium text-stone-500">
-          <span class="inline-flex items-center gap-1 font-bold text-rose-600 bg-rose-50 px-1.5 py-0.5 rounded">
-            <span class="w-1.5 h-1.5 rounded-full bg-rose-600"></span>
-            12 expedite
-          </span>
-          <span>• ready to package today</span>
-        </div>
       </div>
     </div>
 
@@ -57,13 +44,6 @@
       </div>
       <div class="mt-3">
         <div class="text-2xl sm:text-3xl font-extrabold tracking-tight text-stone-900">6</div>
-        <div class="mt-2 flex items-center gap-1.5 text-xs text-stone-500 font-medium">
-          <svg class="w-3.5 h-3.5 text-amber-600 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="9"/>
-            <path d="M12 6v6l4 2"/>
-          </svg>
-          <span class="truncate">Next: Bella (Golden Retriever) 2:30 PM</span>
-        </div>
       </div>
     </div>
 
