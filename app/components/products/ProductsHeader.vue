@@ -1,7 +1,7 @@
 <template>
   <div class="space-y-6">
-    <!-- Vendor Storefront Identity Card -->
-    <div class="bg-white rounded-3xl border border-warm-200/90 p-5 sm:p-6 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-5">
+    <!-- Vendor Storefront Identity Header -->
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-5">
       <div class="flex items-center gap-4">
         <!-- Avatar with Verified Merchant Badge -->
         <div class="relative w-16 h-16 shrink-0">
