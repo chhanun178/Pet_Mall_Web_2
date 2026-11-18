@@ -4,7 +4,7 @@
     <LayoutAppHeader />
 
     <!-- Main App Body with Sidebar & Content -->
-    <div class="flex-1 max-w-[1600px] w-full mx-auto px-4 sm:px-6 lg:px-8 flex relative items-start">
+    <div class="flex-1 max-w-[1600px] w-full mx-auto pl-4 pr-4 sm:pr-6 lg:pr-8 flex relative items-start">
       <!-- Left Navigation Sidebar -->
       <LayoutDashboardSidebar />
 

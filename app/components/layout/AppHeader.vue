@@ -1,6 +1,6 @@
 <template>
   <header class="sticky top-0 z-40 h-16 box-border bg-white border-b border-warm-200/80 will-change-transform transform-gpu">
-    <div class="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
+    <div class="max-w-[1600px] mx-auto pl-4 pr-4 sm:pr-6 lg:pr-8 h-full flex items-center justify-between">
       <!-- Left: Logo -->
       <div class="flex items-center">
         <NuxtLink to="/" class="flex items-center gap-2 group">
