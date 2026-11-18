@@ -142,11 +142,27 @@ export const useProducts = () => {
 
   const addItem = (item: Omit<InventoryItem, 'id'>) => {
     const nextId = items.value.length ? Math.max(...items.value.map(i => i.id)) + 1 : 1
-    items.value.unshift({
-      ...item,
-      id: nextId
-    })
+    items.value = [
+      {
+        ...item,
+        id: nextId
+      },
+      ...items.value
+    ]
     showToast(`Successfully added "${item.name}"!`)
+  }
+
+  const updateItem = (id: number, updated: Partial<InventoryItem>) => {
+    const index = items.value.findIndex(i => i.id === id)
+    if (index !== -1) {
+      const updatedList = [...items.value]
+      updatedList[index] = {
+        ...updatedList[index],
+        ...updated
+      }
+      items.value = updatedList
+      showToast(`Successfully updated "${updatedList[index].name}"!`)
+    }
   }
 
   const deleteItem = (id: number) => {
@@ -181,6 +197,7 @@ export const useProducts = () => {
     openEdit,
     closeDrawer,
     addItem,
+    updateItem,
     deleteItem,
     duplicateItem,
     showToast

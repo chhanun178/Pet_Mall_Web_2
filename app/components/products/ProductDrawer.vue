@@ -49,7 +49,11 @@
                         :class="drawerMode === 'service' ? 'bg-blue-500' : 'bg-[#F58700]'"
                       ></span>
                       <h2 id="drawer-title" class="text-lg font-bold text-stone-900 tracking-tight">
-                        {{ drawerMode === 'service' ? 'Add a new service' : 'Add a new product' }}
+                        {{
+                          editingItem
+                            ? (drawerMode === 'service' ? 'Edit Service' : 'Edit Product')
+                            : (drawerMode === 'service' ? 'Add a new service' : 'Add a new product')
+                        }}
                       </h2>
                     </div>
                     <button
@@ -256,7 +260,11 @@
                     @click="handleSave"
                     class="px-6 py-2.5 rounded-xl bg-[#F58700] hover:bg-[#E07A00] active:scale-95 text-white text-xs sm:text-sm font-bold transition-all duration-200 shadow-sm cursor-pointer"
                   >
-                    {{ drawerMode === 'service' ? 'Save Service' : 'Save Product' }}
+                    {{
+                      editingItem
+                        ? (drawerMode === 'service' ? 'Update Service' : 'Update Product')
+                        : (drawerMode === 'service' ? 'Save Service' : 'Save Product')
+                    }}
                   </button>
                 </div>
               </aside>
@@ -272,7 +280,7 @@
 import { ref, computed, watch, onUnmounted } from 'vue'
 import { useProducts } from '~/composables/useProducts'
 
-const { isDrawerOpen, drawerMode, editingItem, closeDrawer, addItem } = useProducts()
+const { isDrawerOpen, drawerMode, editingItem, closeDrawer, addItem, updateItem } = useProducts()
 
 // Lock background scrolling while drawer is open
 watch(
@@ -318,7 +326,22 @@ watch(
         form.value.title = item.name
         form.value.retailPrice = item.numericPrice || 20
         form.value.category = mode === 'service' ? 'Spa & Grooming' : 'Topical Balms'
-        form.value.stock = 25
+
+        // Extract cost from margin string if present (e.g. "$4.50 cost")
+        const costMatch = item.margin?.match(/\$([0-9.]+)\s+cost/i)
+        form.value.itemCost = costMatch ? parseFloat(costMatch[1]) : (mode === 'service' ? 8 : 4.5)
+
+        // Extract stock number from stock string (e.g. "35 units in stock" -> 35, "8 slots this week" -> 8)
+        const stockMatch = item.stock?.match(/(\d+)/)
+        form.value.stock = stockMatch ? parseInt(stockMatch[1], 10) : 25
+
+        if (mode === 'service') {
+          form.value.duration = item.variantSubtitle || '45 min private session'
+          form.value.description = 'Holistic consultation and soothing coat soak using certified organic tinctures and calm lavender.'
+        } else {
+          form.value.petType = 'All Pets'
+          form.value.description = 'Crafted in small batches using whole organic chamomile flower extract and finely ground colloidal oat groats. Deeply nourishing for cracked pads and dry noses.'
+        }
       } else if (mode === 'service') {
         form.value.title = 'Canine Herbal Coat & Spa Ritual'
         form.value.description = 'Holistic consultation and soothing coat soak using certified organic tinctures and calm lavender.'
@@ -366,35 +389,62 @@ const handleSave = () => {
   const cost = Math.max(0, form.value.itemCost || 0)
   const stockCount = Math.max(1, form.value.stock || 10)
 
-  if (drawerMode.value === 'service') {
-    addItem({
-      name: title,
-      variantSubtitle: form.value.duration || '45 min private session',
-      type: 'Service',
-      price: `$${price.toFixed(2)}`,
-      numericPrice: price,
-      margin: `${marginPct.value} margin`,
-      stock: `${stockCount} slots this week`,
-      stockColor: 'text-blue-700',
-      dotColor: 'bg-blue-500',
-      isActive: true,
-      image: null
-    })
+  if (editingItem.value) {
+    if (drawerMode.value === 'service') {
+      updateItem(editingItem.value.id, {
+        name: title,
+        variantSubtitle: form.value.duration || '45 min private session',
+        type: 'Service',
+        price: `$${price.toFixed(2)}`,
+        numericPrice: price,
+        margin: `${marginPct.value} margin`,
+        stock: `${stockCount} slots this week`,
+        stockColor: 'text-blue-700',
+        dotColor: 'bg-blue-500'
+      })
+    } else {
+      updateItem(editingItem.value.id, {
+        name: title,
+        type: 'Product',
+        price: `$${price.toFixed(2)}`,
+        numericPrice: price,
+        margin: `${marginPct.value} margin ($${cost.toFixed(2)} cost)`,
+        stock: `${stockCount} units in stock`,
+        stockColor: stockCount <= 5 ? 'text-rose-600' : 'text-stone-700',
+        dotColor: stockCount <= 5 ? 'bg-rose-500' : 'bg-emerald-500'
+      })
+    }
   } else {
-    const randomImage = sampleImages[Math.floor(Math.random() * sampleImages.length)]
-    addItem({
-      name: title,
-      variantSubtitle: '1 variant',
-      type: 'Product',
-      price: `$${price.toFixed(2)}`,
-      numericPrice: price,
-      margin: `${marginPct.value} margin ($${cost.toFixed(2)} cost)`,
-      stock: `${stockCount} units in stock`,
-      stockColor: stockCount <= 5 ? 'text-rose-600' : 'text-stone-700',
-      dotColor: stockCount <= 5 ? 'bg-rose-500' : 'bg-emerald-500',
-      isActive: true,
-      image: randomImage
-    })
+    if (drawerMode.value === 'service') {
+      addItem({
+        name: title,
+        variantSubtitle: form.value.duration || '45 min private session',
+        type: 'Service',
+        price: `$${price.toFixed(2)}`,
+        numericPrice: price,
+        margin: `${marginPct.value} margin`,
+        stock: `${stockCount} slots this week`,
+        stockColor: 'text-blue-700',
+        dotColor: 'bg-blue-500',
+        isActive: true,
+        image: null
+      })
+    } else {
+      const randomImage = sampleImages[Math.floor(Math.random() * sampleImages.length)]
+      addItem({
+        name: title,
+        variantSubtitle: '1 variant',
+        type: 'Product',
+        price: `$${price.toFixed(2)}`,
+        numericPrice: price,
+        margin: `${marginPct.value} margin ($${cost.toFixed(2)} cost)`,
+        stock: `${stockCount} units in stock`,
+        stockColor: stockCount <= 5 ? 'text-rose-600' : 'text-stone-700',
+        dotColor: stockCount <= 5 ? 'bg-rose-500' : 'bg-emerald-500',
+        isActive: true,
+        image: randomImage
+      })
+    }
   }
 
   closeDrawer()
