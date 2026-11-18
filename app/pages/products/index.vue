@@ -15,6 +15,11 @@
 </template>
 
 <script setup lang="ts">
+import ProductsHeader from '~/components/products/ProductsHeader.vue'
+import ProductFilters from '~/components/products/ProductFilters.vue'
+import ProductTable from '~/components/products/ProductTable.vue'
+import ProductPagination from '~/components/products/ProductPagination.vue'
+
 useHead({
   title: 'Inventory Catalog • Velvet Paws Atelier | Pet Mall',
   meta: [

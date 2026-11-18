@@ -102,7 +102,7 @@ const defaultItems: InventoryItem[] = [
 
 export const useProducts = () => {
   // Global Nuxt state: persists across hydration and shared between all pages and components
-  const items = useState<InventoryItem[]>('global_inventory_items', () => defaultItems)
+  const items = useState<InventoryItem[]>('global_inventory_items_v2', () => [...defaultItems])
   const isDrawerOpen = useState<boolean>('global_product_drawer_open', () => false)
   const drawerMode = useState<'product' | 'service'>('global_drawer_mode', () => 'product')
   const editingItem = useState<InventoryItem | null>('global_editing_item', () => null)

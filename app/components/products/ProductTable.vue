@@ -132,6 +132,7 @@
 </template>
 
 <script setup lang="ts">
+import BaseToggle from '~/components/ui/BaseToggle.vue'
 import { useProducts } from '~/composables/useProducts'
 
 const { items, deleteItem, duplicateItem, openEdit } = useProducts()
