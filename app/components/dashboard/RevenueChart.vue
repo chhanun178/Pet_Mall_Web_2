@@ -4,9 +4,9 @@
     <div class="flex items-start justify-between mb-5">
       <div>
         <h2 class="text-sm font-bold text-stone-900 leading-tight">Weekly Revenue</h2>
-        <p class="text-[11px] text-stone-500 mt-0.5">Physical items vs Wellness services</p>
+        <p class="text-xs text-stone-500 mt-0.5">Physical items vs Wellness services</p>
       </div>
-      <div class="text-lg font-extrabold text-stone-900">$8,940</div>
+      <div class="text-xl font-extrabold text-stone-900">$8,940</div>
     </div>
 
     <!-- Bar Chart Graphic -->
@@ -34,7 +34,7 @@
 
         <!-- Day Label -->
         <span
-          class="text-[11px] font-bold transition-colors"
+          class="text-xs font-bold transition-colors"
           :class="day.isHighlight ? 'text-brand-600 font-extrabold' : 'text-stone-400 group-hover:text-stone-700'"
         >
           {{ day.label }}

@@ -16,7 +16,7 @@
             </div>
             <span class="text-xl font-bold tracking-tight text-white">Pet<span class="text-brand-500">Mall</span></span>
           </div>
-          <p class="text-xs sm:text-sm text-stone-400 max-w-sm leading-relaxed">
+          <p class="text-sm text-stone-400 max-w-sm leading-relaxed">
             The warm, community-first marketplace connecting loving pet parents with mindful independent makers, holistic spa therapists, and certified caretakers.
           </p>
         </div>

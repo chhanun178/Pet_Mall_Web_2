@@ -22,11 +22,11 @@
                 <div>
                   <!-- Drawer Header -->
                   <div
-                    class="p-6 border-b border-warm-200/80 flex items-center justify-between sticky top-0 bg-white/95 backdrop-blur-sm z-10">
+                    class="px-6 py-3.5 border-b border-warm-200/80 flex items-center justify-between sticky top-0 bg-white/95 backdrop-blur-sm z-10">
                     <div class="flex items-center gap-2.5">
                       <span class="w-3 h-3 rounded-full animate-pulse"
                         :class="drawerMode === 'service' ? 'bg-blue-500' : 'bg-[#F58700]'"></span>
-                      <h2 id="drawer-title" class="text-lg font-bold text-stone-900 tracking-tight">
+                      <h2 id="drawer-title" class="text-xl font-bold text-stone-900 tracking-tight">
                         {{
                           editingItem
                             ? (drawerMode === 'service' ? 'Edit Service' : 'Edit Product')
@@ -35,7 +35,7 @@
                       </h2>
                     </div>
                     <button @click="closeDrawer" type="button"
-                      class="w-8 h-8 rounded-xl flex items-center justify-center text-stone-400 hover:text-stone-700 hover:bg-stone-100 transition-all cursor-pointer"
+                      class="w-8 h-8 rounded-xl flex items-center justify-center text-stone-500 hover:text-stone-800 hover:bg-stone-100 transition-all cursor-pointer"
                       title="Close drawer">
                       <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -44,7 +44,7 @@
                   </div>
 
                   <!-- Form Content -->
-                  <div class="p-6 space-y-6 text-xs sm:text-sm">
+                  <div class="p-6 space-y-6">
                     <!-- 1. Basic Information -->
                     <div class="space-y-4">
                       <h3 class="font-bold text-stone-900 text-sm">Basic Information</h3>
@@ -56,7 +56,7 @@
                         </label>
                         <input type="text" v-model="form.title"
                           :placeholder="drawerMode === 'service' ? 'e.g. Herbal Paw Soak & Relax' : 'e.g. Organic Chamomile Paw Balm'"
-                          class="w-full px-3.5 py-2.5 rounded-xl border border-warm-200 bg-white text-stone-800 text-xs sm:text-sm placeholder-stone-400 hover:border-stone-300 focus:border-[#F58700] focus:ring-4 focus:ring-[#F58700]/10 outline-none transition-all duration-200 shadow-sm" />
+                          class="w-full px-3.5 py-2.5 rounded-xl border border-warm-200 bg-white text-stone-800 text-sm placeholder-stone-400 hover:border-stone-300 focus:border-[#F58700] focus:ring-4 focus:ring-[#F58700]/10 outline-none transition-all duration-200 shadow-sm" />
                       </div>
 
                       <!-- Description -->
@@ -65,7 +65,7 @@
                           {{ drawerMode === 'service' ? 'Service Description' : 'Product Description' }}
                         </label>
                         <textarea v-model="form.description" rows="3" placeholder="Enter description and details..."
-                          class="w-full px-3.5 py-2.5 rounded-xl border border-warm-200 bg-white text-stone-800 text-xs sm:text-sm placeholder-stone-400 hover:border-stone-300 focus:border-[#F58700] focus:ring-4 focus:ring-[#F58700]/10 outline-none transition-all duration-200 shadow-sm resize-none leading-relaxed"></textarea>
+                          class="w-full px-3.5 py-2.5 rounded-xl border border-warm-200 bg-white text-stone-800 text-sm placeholder-stone-400 hover:border-stone-300 focus:border-[#F58700] focus:ring-4 focus:ring-[#F58700]/10 outline-none transition-all duration-200 shadow-sm resize-none leading-relaxed"></textarea>
                       </div>
 
                       <!-- Category & Pet/Service Type -->
@@ -74,7 +74,7 @@
                           <label class="block text-xs font-semibold text-stone-600">Category</label>
                           <div class="relative">
                             <select v-model="form.category"
-                              class="w-full appearance-none px-3.5 py-2.5 rounded-xl border border-warm-200 bg-white text-stone-800 text-xs sm:text-sm hover:border-stone-300 focus:border-[#F58700] focus:ring-4 focus:ring-[#F58700]/10 outline-none transition-all duration-200 shadow-sm pr-8 cursor-pointer font-medium">
+                              class="w-full appearance-none px-3.5 py-2.5 rounded-xl border border-warm-200 bg-white text-stone-800 text-sm hover:border-stone-300 focus:border-[#F58700] focus:ring-4 focus:ring-[#F58700]/10 outline-none transition-all duration-200 shadow-sm pr-8 cursor-pointer font-medium">
                               <template v-if="drawerMode === 'product'">
                                 <option>Topical Balms</option>
                                 <option>Ear Care</option>
@@ -90,7 +90,7 @@
                               </template>
                             </select>
                             <div
-                              class="absolute inset-y-0 right-0 pr-2.5 flex items-center pointer-events-none text-stone-400">
+                              class="absolute inset-y-0 right-0 pr-2.5 flex items-center pointer-events-none text-stone-500">
                               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
@@ -104,13 +104,13 @@
                           <label class="block text-xs font-semibold text-stone-600">Pet Type</label>
                           <div class="relative">
                             <select v-model="form.petType"
-                              class="w-full appearance-none px-3.5 py-2.5 rounded-xl border border-warm-200 bg-white text-stone-800 text-xs sm:text-sm hover:border-stone-300 focus:border-[#F58700] focus:ring-4 focus:ring-[#F58700]/10 outline-none transition-all duration-200 shadow-sm pr-8 cursor-pointer font-medium">
+                              class="w-full appearance-none px-3.5 py-2.5 rounded-xl border border-warm-200 bg-white text-stone-800 text-sm hover:border-stone-300 focus:border-[#F58700] focus:ring-4 focus:ring-[#F58700]/10 outline-none transition-all duration-200 shadow-sm pr-8 cursor-pointer font-medium">
                               <option>All Pets</option>
                               <option>Dogs Only</option>
                               <option>Cats Only</option>
                             </select>
                             <div
-                              class="absolute inset-y-0 right-0 pr-2.5 flex items-center pointer-events-none text-stone-400">
+                              class="absolute inset-y-0 right-0 pr-2.5 flex items-center pointer-events-none text-stone-500">
                               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
@@ -122,7 +122,7 @@
                         <div v-else class="space-y-1.5">
                           <label class="block text-xs font-semibold text-stone-600">Session Duration</label>
                           <input type="text" v-model="form.duration" placeholder="e.g. 45 min private session"
-                            class="w-full px-3.5 py-2.5 rounded-xl border border-warm-200 bg-white text-stone-800 text-xs sm:text-sm hover:border-stone-300 focus:border-[#F58700] focus:ring-4 focus:ring-[#F58700]/10 outline-none transition-all duration-200 shadow-sm" />
+                            class="w-full px-3.5 py-2.5 rounded-xl border border-warm-200 bg-white text-stone-800 text-sm hover:border-stone-300 focus:border-[#F58700] focus:ring-4 focus:ring-[#F58700]/10 outline-none transition-all duration-200 shadow-sm" />
                         </div>
                       </div>
                     </div>
@@ -140,21 +140,21 @@
                           </label>
                           <div class="relative">
                             <span
-                              class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-stone-400 text-xs font-medium">$</span>
+                              class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-stone-500 text-sm font-medium">$</span>
                             <input type="number" v-model.number="form.retailPrice" min="1" step="0.5"
-                              class="w-full pl-8 pr-3 py-2.5 rounded-xl border border-warm-200 bg-white text-stone-800 text-xs sm:text-sm hover:border-stone-300 focus:border-[#F58700] focus:ring-4 focus:ring-[#F58700]/10 outline-none transition-all duration-200 shadow-sm" />
+                              class="w-full pl-8 pr-3 py-2.5 rounded-xl border border-warm-200 bg-white text-stone-800 text-sm hover:border-stone-300 focus:border-[#F58700] focus:ring-4 focus:ring-[#F58700]/10 outline-none transition-all duration-200 shadow-sm" />
                           </div>
                         </div>
 
                         <div class="space-y-1.5">
-                          <label class="block text-xs font-semibold text-stone-600">
+                          <label class="block text-xs font-semibold text-stone-700">
                             {{ drawerMode === 'service' ? 'Material / Cost' : 'Item Cost' }}
                           </label>
                           <div class="relative">
                             <span
-                              class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-stone-400 text-xs font-medium">$</span>
+                              class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-stone-500 text-sm font-medium">$</span>
                             <input type="number" v-model.number="form.itemCost" min="0" step="0.1"
-                              class="w-full pl-8 pr-3 py-2.5 rounded-xl border border-warm-200 bg-white text-stone-800 text-xs sm:text-sm hover:border-stone-300 focus:border-[#F58700] focus:ring-4 focus:ring-[#F58700]/10 outline-none transition-all duration-200 shadow-sm" />
+                              class="w-full pl-8 pr-3 py-2.5 rounded-xl border border-warm-200 bg-white text-stone-800 text-sm hover:border-stone-300 focus:border-[#F58700] focus:ring-4 focus:ring-[#F58700]/10 outline-none transition-all duration-200 shadow-sm" />
                           </div>
                         </div>
                       </div>
@@ -162,17 +162,17 @@
                       <!-- Margin / Profit Banner -->
                       <div
                         class="px-4 py-3 rounded-xl bg-slate-100/80 flex items-center justify-between text-xs font-medium transition-all">
-                        <span class="text-stone-500">Margin / Profit</span>
+                        <span class="text-stone-700 font-semibold">Margin / Profit</span>
                         <span class="font-bold text-stone-900 tracking-tight">{{ marginPct }} / {{ profitVal }}</span>
                       </div>
 
                       <!-- Stock or Slots -->
                       <div class="space-y-1.5">
-                        <label class="block text-xs font-semibold text-stone-600">
+                        <label class="block text-xs font-semibold text-stone-700">
                           {{ drawerMode === 'service' ? 'Weekly Available Slots' : 'Stock Quantity' }}
                         </label>
                         <div class="relative">
-                          <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-stone-400">
+                          <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-stone-500">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8"
                               viewBox="0 0 24 24">
                               <rect x="3" y="4" width="18" height="18" rx="2" />
@@ -180,7 +180,7 @@
                             </svg>
                           </span>
                           <input type="number" v-model.number="form.stock" min="1"
-                            class="w-full pl-9 pr-3 py-2.5 rounded-xl border border-warm-200 bg-white text-stone-800 text-xs sm:text-sm hover:border-stone-300 focus:border-[#F58700] focus:ring-4 focus:ring-[#F58700]/10 outline-none transition-all duration-200 shadow-sm" />
+                            class="w-full pl-9 pr-3 py-2.5 rounded-xl border border-warm-200 bg-white text-stone-800 text-sm hover:border-stone-300 focus:border-[#F58700] focus:ring-4 focus:ring-[#F58700]/10 outline-none transition-all duration-200 shadow-sm" />
                         </div>
                       </div>
                     </div>
@@ -208,13 +208,13 @@
 
                 <!-- Drawer Footer -->
                 <div
-                  class="p-5 border-t border-warm-200 flex items-center justify-end gap-3 bg-white sticky bottom-0 z-10">
+                  class="px-6 py-3.5 border-t border-warm-200 flex items-center justify-end gap-3 bg-white sticky bottom-0 z-10">
                   <button type="button" @click="closeDrawer"
-                    class="px-4 py-2.5 text-xs sm:text-sm font-semibold text-stone-600 hover:text-stone-900 transition-colors cursor-pointer">
+                    class="px-3.5 py-2 rounded-xl border border-transparent text-sm font-semibold text-stone-600 hover:text-stone-900 transition-colors cursor-pointer">
                     Cancel
                   </button>
                   <button type="button" @click="handleSave"
-                    class="px-6 py-2.5 rounded-xl bg-[#F58700] hover:bg-[#E07A00] active:scale-95 text-white text-xs sm:text-sm font-bold transition-all duration-200 shadow-sm cursor-pointer">
+                    class="px-3.5 py-2 rounded-xl border border-transparent bg-[#F58700] hover:bg-[#E07A00] active:scale-95 text-white text-sm font-bold transition-all duration-200 shadow-sm cursor-pointer">
                     {{
                       editingItem
                         ? (drawerMode === 'service' ? 'Update Service' : 'Update Product')
@@ -370,7 +370,7 @@ const handleSave = () => {
         price: `$${price.toFixed(2)}`,
         numericPrice: price,
         margin: `${marginPct.value} margin ($${cost.toFixed(2)} cost)`,
-        stock: `${stockCount} units in stock`,
+        stock: `${stockCount} units`,
         stockColor: stockCount <= 5 ? 'text-rose-600' : 'text-stone-700',
         dotColor: stockCount <= 5 ? 'bg-rose-500' : 'bg-emerald-500'
       })
@@ -399,7 +399,7 @@ const handleSave = () => {
         price: `$${price.toFixed(2)}`,
         numericPrice: price,
         margin: `${marginPct.value} margin ($${cost.toFixed(2)} cost)`,
-        stock: `${stockCount} units in stock`,
+        stock: `${stockCount} units`,
         stockColor: stockCount <= 5 ? 'text-rose-600' : 'text-stone-700',
         dotColor: stockCount <= 5 ? 'bg-rose-500' : 'bg-emerald-500',
         isActive: true,

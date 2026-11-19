@@ -10,8 +10,8 @@
           </svg>
         </div>
         <div>
-          <h2 class="text-base sm:text-lg font-bold text-stone-900 leading-tight">Holistic Service Appointments</h2>
-          <p class="text-xs text-stone-500">In-person consultations and spa rituals for today</p>
+          <h2 class="text-xl font-bold text-stone-900 leading-tight">Holistic Service Appointments</h2>
+          <p class="text-sm text-stone-500">In-person consultations and spa rituals for today</p>
         </div>
       </div>
 
@@ -29,7 +29,7 @@
             <span class="text-xs font-bold text-blue-700 tracking-wide">
               TODAY • 02:30 PM
             </span>
-            <span class="px-2 py-0.5 rounded-md bg-stone-200/60 text-stone-600 text-[11px] font-semibold">
+            <span class="px-2 py-0.5 rounded-md bg-stone-200/60 text-stone-600 text-xs font-semibold">
               45 Min
             </span>
           </div>
@@ -49,7 +49,7 @@
         </div>
 
         <div class="flex items-center justify-between pt-4 mt-4 border-t border-warm-200/70">
-          <span class="text-base font-extrabold text-stone-900">$65.00</span>
+          <span class="text-sm font-bold text-stone-900">$65.00</span>
           <button class="px-3 py-1.5 rounded-lg border border-warm-200 text-xs font-semibold text-stone-700 hover:bg-stone-50 hover:border-stone-300 transition-colors">
             Prepare Station
           </button>
@@ -63,7 +63,7 @@
             <span class="text-xs font-bold text-blue-700 tracking-wide">
               TODAY • 04:15 PM
             </span>
-            <span class="px-2 py-0.5 rounded-md bg-stone-200/60 text-stone-600 text-[11px] font-semibold">
+            <span class="px-2 py-0.5 rounded-md bg-stone-200/60 text-stone-600 text-xs font-semibold">
               60 Min
             </span>
           </div>
@@ -83,7 +83,7 @@
         </div>
 
         <div class="flex items-center justify-between pt-4 mt-4 border-t border-warm-200/70">
-          <span class="text-base font-extrabold text-stone-900">$85.00</span>
+          <span class="text-sm font-bold text-stone-900">$85.00</span>
           <button class="px-3 py-1.5 rounded-lg border border-warm-200 text-xs font-semibold text-stone-700 hover:bg-stone-50 hover:border-stone-300 transition-colors">
             View Pet Profile
           </button>

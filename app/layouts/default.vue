@@ -34,7 +34,7 @@
     >
       <div
         v-if="toastMessage"
-        class="fixed bottom-6 right-6 z-50 flex items-center gap-3 px-4 py-3 rounded-2xl bg-stone-900 text-white shadow-xl border border-stone-800 text-xs sm:text-sm font-medium"
+        class="fixed bottom-6 right-6 z-50 flex items-center gap-3 px-4 py-3 rounded-2xl bg-stone-900 text-white shadow-xl border border-stone-800 text-sm font-medium"
       >
         <div class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">
           ✓

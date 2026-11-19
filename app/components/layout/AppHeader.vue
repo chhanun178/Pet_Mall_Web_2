@@ -1,5 +1,5 @@
 <template>
-  <header class="sticky top-0 z-40 h-16 box-border bg-white border-b border-warm-200/80">
+  <header class="sticky top-0 z-40 h-12 box-border bg-white border-b border-warm-200/80">
     <div class="max-w-[1600px] mx-auto px-4 h-full flex items-center justify-between">
       <!-- Left: Logo -->
       <div class="flex items-center">
@@ -19,19 +19,19 @@
       </div>
 
       <!-- Right Actions: Notifications & Merchant Badge -->
-      <div class="flex items-center gap-4">
+      <div class="flex items-center gap-3">
         <!-- Bookmark / Notice Icon -->
-        <button class="relative p-2 rounded-full text-stone-500 hover:text-stone-800 hover:bg-stone-100 transition-colors" title="Notifications">
+        <button class="relative p-1.5 rounded-full text-stone-500 hover:text-stone-800 hover:bg-stone-100 transition-colors" title="Notifications">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
           </svg>
-          <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full ring-2 ring-white"></span>
+          <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full ring-2 ring-white"></span>
         </button>
 
         <!-- Merchant Profile Avatar -->
         <div class="flex items-center pl-2 sm:pl-3 border-l border-warm-200">
           <div
-            class="w-9 h-9 rounded-full bg-amber-800 text-amber-100 flex items-center justify-center font-bold text-sm ring-2 ring-warm-200 hover:ring-brand-500 transition-all cursor-pointer"
+            class="w-8 h-8 rounded-full bg-amber-800 text-amber-100 flex items-center justify-center font-bold text-xs ring-2 ring-warm-200 hover:ring-brand-500 transition-all cursor-pointer"
             title="Artisan Paws Co. • Verified Merchant"
           >
             AP

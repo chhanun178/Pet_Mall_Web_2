@@ -1,6 +1,6 @@
 <template>
   <aside
-    class="w-52 shrink-0 hidden md:flex flex-col justify-between sticky top-16 h-[calc(100vh-4rem)] border-r border-warm-200/90 py-6 pr-4 self-start select-none will-change-transform transform-gpu"
+    class="w-52 shrink-0 hidden md:flex flex-col justify-between sticky top-12 h-[calc(100vh-3rem)] border-r border-warm-200/90 py-6 pr-4 self-start select-none will-change-transform transform-gpu"
   >
     <!-- Menu items -->
     <nav class="space-y-1">
@@ -117,7 +117,7 @@
         class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl border border-[#D0E6FF] bg-white hover:bg-[#F0F7FF] text-[#1D68E2] text-xs font-bold transition-all group shadow-xs"
       >
         <span class="flex items-center gap-2 min-w-0">
-          <svg class="w-4 h-4 text-[#1D68E2] shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+          <svg class="w-5 h-5 text-[#1D68E2] shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
           </svg>
           <span class="truncate">Storefront Profile</span>

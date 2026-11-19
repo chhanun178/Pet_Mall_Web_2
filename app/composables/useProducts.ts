@@ -22,7 +22,7 @@ const defaultItems: InventoryItem[] = [
     price: '$22.00',
     numericPrice: 22,
     margin: '79.55% margin ($4.50 cost)',
-    stock: '35 units in stock',
+    stock: '35 units',
     stockColor: 'text-stone-700',
     dotColor: 'bg-emerald-500',
     isActive: true,
@@ -36,7 +36,7 @@ const defaultItems: InventoryItem[] = [
     price: '$16.00',
     numericPrice: 16,
     margin: '73.75% margin ($4.20 cost)',
-    stock: '45 units in stock',
+    stock: '45 units',
     stockColor: 'text-stone-700',
     dotColor: 'bg-emerald-500',
     isActive: true,
@@ -50,7 +50,7 @@ const defaultItems: InventoryItem[] = [
     price: '$24.00',
     numericPrice: 24,
     margin: '68.00% margin ($7.68 cost)',
-    stock: '18 units in stock',
+    stock: '18 units',
     stockColor: 'text-stone-700',
     dotColor: 'bg-emerald-500',
     isActive: true,
@@ -64,7 +64,7 @@ const defaultItems: InventoryItem[] = [
     price: '$32.50',
     numericPrice: 32.5,
     margin: '62.50% margin ($12.18 cost)',
-    stock: '62 units in stock',
+    stock: '62 units',
     stockColor: 'text-stone-700',
     dotColor: 'bg-emerald-500',
     isActive: true,
@@ -78,7 +78,7 @@ const defaultItems: InventoryItem[] = [
     price: '$18.00',
     numericPrice: 18,
     margin: '70.00% margin ($5.40 cost)',
-    stock: '4 units in stock',
+    stock: '4 units',
     stockColor: 'text-rose-600',
     dotColor: 'bg-rose-500',
     isActive: true,
@@ -102,7 +102,7 @@ const defaultItems: InventoryItem[] = [
 
 export const useProducts = () => {
   // Global Nuxt state: persists across hydration and shared between all pages and components
-  const items = useState<InventoryItem[]>('global_inventory_items_v2', () => [...defaultItems])
+  const items = useState<InventoryItem[]>('global_inventory_items_v3', () => [...defaultItems])
   const isDrawerOpen = useState<boolean>('global_product_drawer_open', () => false)
   const drawerMode = useState<'product' | 'service'>('global_drawer_mode', () => 'product')
   const editingItem = useState<InventoryItem | null>('global_editing_item', () => null)

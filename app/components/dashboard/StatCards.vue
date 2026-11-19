@@ -13,7 +13,7 @@
         </div>
       </div>
       <div class="mt-3">
-        <div class="text-2xl sm:text-3xl font-extrabold tracking-tight text-stone-900">$1,420.50</div>
+        <div class="text-2xl font-extrabold tracking-tight text-stone-900">$1,420.50</div>
       </div>
     </div>
 
@@ -28,7 +28,7 @@
         </div>
       </div>
       <div class="mt-3">
-        <div class="text-2xl sm:text-3xl font-extrabold tracking-tight text-stone-900">18</div>
+        <div class="text-2xl font-extrabold tracking-tight text-stone-900">18</div>
       </div>
     </div>
 
@@ -43,7 +43,7 @@
         </div>
       </div>
       <div class="mt-3">
-        <div class="text-2xl sm:text-3xl font-extrabold tracking-tight text-stone-900">6</div>
+        <div class="text-2xl font-extrabold tracking-tight text-stone-900">6</div>
       </div>
     </div>
 
@@ -58,8 +58,8 @@
         </div>
       </div>
       <div class="mt-3">
-        <div class="text-2xl sm:text-3xl font-extrabold tracking-tight text-stone-900">
-          4.9 <span class="text-sm font-normal text-stone-400">/ 5.0</span>
+        <div class="text-2xl font-extrabold tracking-tight text-stone-900">
+          4.9 <span class="text-xs font-normal text-stone-500">/ 5.0</span>
         </div>
         <div class="mt-2 flex items-center gap-1.5 text-xs text-stone-500 font-medium">
           <div class="flex text-amber-500">
