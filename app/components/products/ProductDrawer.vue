@@ -24,8 +24,6 @@
                   <div
                     class="px-6 py-3.5 border-b border-warm-200/80 flex items-center justify-between sticky top-0 bg-white/95 backdrop-blur-sm z-10">
                     <div class="flex items-center gap-2.5">
-                      <span class="w-3 h-3 rounded-full animate-pulse"
-                        :class="drawerMode === 'service' ? 'bg-blue-500' : 'bg-[#F58700]'"></span>
                       <h2 id="drawer-title" class="text-xl font-bold text-stone-900 tracking-tight">
                         {{
                           editingItem
