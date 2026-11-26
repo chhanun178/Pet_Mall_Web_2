@@ -1,6 +1,11 @@
 export default defineNuxtConfig({
   compatibilityDate: '2026-11-18',
   modules: ['@nuxtjs/tailwindcss'],
+  runtimeConfig: {
+    public: {
+      apiBase: process.env.NUXT_PUBLIC_API_BASE || 'http://localhost:4000',
+    },
+  },
   postcss: {
     plugins: {
       'tailwindcss/nesting': false,

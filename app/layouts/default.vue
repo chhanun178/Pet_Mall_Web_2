@@ -1,10 +1,28 @@
+<script setup lang="ts">
+import { useAuth } from '~/composables/auth/useAuth'
+import { useProducts } from '~/composables/useProducts'
+
+const { toastMessage } = useProducts()
+const { isVendor, logout } = useAuth()
+</script>
+
 <template>
   <div class="min-h-screen flex flex-col bg-warm-50 text-stone-800 font-sans selection:bg-brand-500 selection:text-white">
     <!-- Top Global Header -->
     <LayoutAppHeader />
 
+    <!-- Vendor Desktop-Only Guard on Mobile/Tablet (<1024px) -->
+    <div v-if="isVendor" class="lg:hidden flex-1 flex items-center justify-center p-4">
+      <div class="w-full max-w-md">
+        <AuthVendorDesktopNotice show-sign-out @sign-out="logout()" />
+      </div>
+    </div>
+
     <!-- Main App Body with Sidebar & Content -->
-    <div class="flex-1 max-w-[1600px] w-full mx-auto px-4 flex relative items-start">
+    <div
+      class="flex-1 max-w-[1600px] w-full mx-auto px-4 relative items-start"
+      :class="isVendor ? 'hidden lg:flex' : 'flex'"
+    >
       <!-- Left Navigation Sidebar -->
       <LayoutDashboardSidebar />
 
@@ -44,9 +62,3 @@
     </transition>
   </div>
 </template>
-
-<script setup lang="ts">
-import { useProducts } from '~/composables/useProducts'
-
-const { toastMessage } = useProducts()
-</script>
