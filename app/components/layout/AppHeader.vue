@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { useAuth } from '~/composables/auth/useAuth'
 
+defineProps<{ catalog?: boolean }>()
+const mounted = ref(false)
+onMounted(() => { mounted.value = true })
+
 const {
   isAuthenticated,
   isVendor,
@@ -25,9 +29,11 @@ const {
               <path d="M12 10.5c-3.3 0-6 2.3-6 5.5 0 2.2 1.8 4 4 4 1.2 0 1.5-.7 2-.7s.8.7 2 .7c2.2 0 4-1.8 4-4 0-3.2-2.7-5.5-6-5.5z"/>
             </svg>
           </div>
-          <span class="text-lg sm:text-xl font-bold tracking-tight text-stone-900">Pet<span class="text-brand-600">Mall</span></span>
+          <span class="text-lg sm:text-xl font-bold tracking-tight text-stone-900">Pet<span :class="catalog ? '' : 'text-brand-600'">{{ catalog ? ' Mall' : 'Mall' }}</span></span>
         </NuxtLink>
       </div>
+
+      <slot name="navigation" />
 
       <!-- Right Actions: Notifications & Auth Profile -->
       <div class="flex items-center gap-2.5 sm:gap-3">
@@ -40,7 +46,7 @@ const {
 
         <!-- Authenticated State -->
         <div
-          v-if="isAuthenticated"
+          v-if="isAuthenticated && (!catalog || mounted)"
           class="flex items-center gap-2.5 pl-2.5 sm:pl-3 border-l border-warm-200"
         >
           <NuxtLink
@@ -52,7 +58,7 @@ const {
               class="w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs ring-2 ring-warm-200 transition-all"
               :class="
                 isVendor
-                  ? 'bg-[#1B6B52] text-white group-hover:ring-[#1B6B52]/40'
+                  ? (catalog ? 'bg-[#9d4300] text-white group-hover:ring-[#9d4300]/40' : 'bg-[#1B6B52] text-white group-hover:ring-[#1B6B52]/40')
                   : 'bg-brand-600 text-white group-hover:ring-brand-500/40'
               "
             >
@@ -82,7 +88,7 @@ const {
 
         <!-- Guest State -->
         <div
-          v-else
+          v-else-if="!catalog || mounted"
           class="flex items-center gap-2 pl-2.5 sm:pl-3 border-l border-warm-200"
         >
           <NuxtLink

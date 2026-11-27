@@ -1,83 +1,49 @@
-<template>
-  <div class="space-y-6">
-    <!-- Vendor Storefront Identity Header -->
-    <div class="flex items-center gap-4">
-      <!-- Avatar with Verified Merchant Badge -->
-      <div class="relative w-16 h-16 shrink-0">
-        <img
-          src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=160&auto=format&fit=crop&q=80"
-          alt="Velvet Paws Atelier & Apothecary"
-          class="w-full h-full rounded-2xl object-cover ring-1 ring-stone-200/80"
-        />
-        <span
-          class="absolute -bottom-1 -right-1 w-5 h-5 bg-[#10B981] rounded-full flex items-center justify-center ring-2 ring-white text-white shadow-sm"
-          title="Verified Merchant"
-        >
-          <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-          </svg>
-        </span>
-      </div>
+<script setup lang="ts">
+import type { ListingType } from '~/types/products'
 
-      <!-- Identity Info -->
-      <div class="space-y-1">
-        <h1 class="text-xl font-bold text-stone-900 tracking-tight leading-snug">
-          Velvet Paws Atelier & Apothecary
-        </h1>
-        <div class="flex items-center gap-2">
-          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-[#F4F1EA] text-stone-700 text-xs font-semibold">
-            <svg class="w-3.5 h-3.5 text-[#C86400]" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
-            </svg>
-            Stall #VP-892
-          </span>
-        </div>
-        <p class="text-sm text-stone-600 leading-relaxed font-medium">
-          Botanical balms, small-batch herbal tinctures, and bespoke holistic pet rituals • Multi-vendor Verified Merchant
-        </p>
+defineProps<{
+  storeName: string
+  storeSlug: string
+  initials: string
+  disabled: boolean
+}>()
+
+const emit = defineEmits<{ add: [type: ListingType] }>()
+</script>
+
+<template>
+  <div>
+    <div class="mb-8 flex items-center gap-4 sm:gap-5">
+      <div class="grid size-14 shrink-0 place-items-center rounded-full bg-[#fce8d3] text-lg font-bold text-[#9d4300] sm:size-20 sm:text-2xl" aria-hidden="true">
+        {{ initials }}
+      </div>
+      <div class="min-w-0">
+        <p class="break-words text-xl font-bold leading-tight tracking-tight sm:text-2xl">{{ storeName }}</p>
+        <p v-if="storeSlug" class="mt-1 break-words text-sm text-[#6b7280]">Marketplace storefront <span class="text-[#584237]">· {{ storeSlug }}</span></p>
       </div>
     </div>
 
-    <!-- Inventory Catalog Subheading & Action Buttons -->
-    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pt-1">
+    <div class="flex flex-col justify-between gap-4 lg:flex-row lg:items-center">
       <div>
-        <h2 class="text-xl font-bold tracking-tight text-stone-900">Inventory Catalog</h2>
-        <p class="text-sm text-stone-600 mt-0.5 font-medium">This is the page where the vendor can manage their products.</p>
+        <h1 class="text-xl font-semibold tracking-tight">Inventory Catalog</h1>
+        <p class="mt-0.5 text-sm text-[#6b7280]">Manage your products and services.</p>
       </div>
-
-      <!-- Action Buttons -->
-      <div class="flex items-center gap-2.5 shrink-0 self-start md:self-center">
-        <!-- Add New Product Button -->
+      <div class="flex flex-wrap items-center gap-3">
         <button
-          @click="openAddProduct"
+          v-for="type in (['product', 'service'] as const)"
+          :key="type"
           type="button"
-          class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border border-blue-200 bg-white hover:bg-blue-50/50 text-[#2563EB] text-sm font-semibold transition-all shadow-sm active:scale-95 cursor-pointer"
+          :disabled="disabled"
+          class="inline-flex items-center gap-2 rounded-lg bg-white px-3 py-2.5 text-sm font-semibold text-[#006398] shadow-sm transition hover:bg-[#f1f3ff] enabled:active:scale-[0.98] disabled:opacity-50 sm:px-4"
+          @click="emit('add', type)"
         >
-          <svg class="w-5 h-5 text-[#2563EB]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="9"/>
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v8m-4-4h8"/>
+          <svg aria-hidden="true" class="size-5 text-[#00a2f4]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 8v8m-4-4h8" stroke-linecap="round" />
           </svg>
-          <span>Add New Product</span>
-        </button>
-
-        <!-- Add Service Button -->
-        <button
-          @click="openAddService"
-          type="button"
-          class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-transparent bg-[#F58700] hover:bg-[#E07A00] text-white text-sm font-bold transition-all shadow-sm active:scale-95 cursor-pointer"
-        >
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-6-6h12"/>
-          </svg>
-          <span>Add Service</span>
+          {{ type === 'product' ? 'Add New Product' : 'Add New Service' }}
         </button>
       </div>
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { useProducts } from '~/composables/useProducts'
-
-const { openAddProduct, openAddService } = useProducts()
-</script>

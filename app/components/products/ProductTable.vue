@@ -1,115 +1,192 @@
-<template>
-  <div class="bg-white rounded-2xl border border-warm-200/90 shadow-card overflow-hidden">
-    <div class="overflow-x-auto">
-      <table class="w-full text-left border-collapse">
-        <thead>
-          <tr
-            class="bg-warm-50/70 border-b border-warm-200/80 text-xs font-bold uppercase tracking-wider text-stone-600 leading-normal">
-            <th class="py-4 px-5 sm:px-6">Item</th>
-            <th class="py-4 px-4">Type</th>
-            <th class="py-4 px-4">Retail & Margin</th>
-            <th class="py-4 px-4">Stock</th>
-            <th class="py-4 px-4 text-center">Status</th>
-            <th class="py-4 px-6 text-right">Actions</th>
-          </tr>
-        </thead>
-        <tbody class="divide-y divide-warm-100 text-sm">
-          <tr v-for="item in items" :key="item.id" class="odd:bg-white even:bg-warm-50 align-top">
-            <!-- Item Details -->
-            <td class="py-5 px-5 sm:px-6 align-top">
-              <div class="flex items-start gap-3.5">
-                <div
-                  class="w-12 h-12 rounded-xl bg-amber-50 border border-warm-200 overflow-hidden shrink-0 flex items-center justify-center">
-                  <img v-if="item.image" :src="item.image" :alt="item.name" class="w-full h-full object-cover" />
-                  <!-- Service Icon -->
-                  <div v-else class="w-full h-full bg-blue-50/80 text-blue-600 flex items-center justify-center">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                    </svg>
-                  </div>
-                </div>
-                <div class="min-w-0 flex-1">
-                  <div class="font-bold text-stone-900 text-sm leading-snug">
-                    {{ item.name }}
-                  </div>
-                  <div class="text-xs text-stone-500 mt-1.5 leading-relaxed font-medium">
-                    {{ item.variantSubtitle }}
-                  </div>
-                </div>
-              </div>
-            </td>
-
-            <!-- Listing Type -->
-            <td class="py-5 px-4 align-top">
-              <span v-if="item.type === 'Product'" class="text-xs font-semibold text-stone-700 leading-snug inline-block">
-                Product
-              </span>
-              <span v-else
-                class="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-bold bg-blue-50 text-blue-600 border border-blue-200/80 leading-snug">
-                Service
-              </span>
-            </td>
-
-            <!-- Retail & Margin -->
-            <td class="py-5 px-4 align-top">
-              <div class="font-bold text-stone-900 text-sm leading-snug">{{ item.price }}</div>
-              <div class="text-xs text-stone-600 mt-1.5 leading-relaxed font-medium">
-                {{ item.margin }}
-              </div>
-            </td>
-
-            <!-- Stock / Availability -->
-            <td class="py-5 px-4 align-top">
-              <div class="text-xs font-semibold leading-snug" :class="item.stockColor">
-                {{ item.stock.replace(/\s+in stock$/i, '') }}
-              </div>
-            </td>
-
-            <!-- Status Toggle -->
-            <td class="py-5 px-4 text-center align-top">
-              <BaseToggle v-model="item.isActive" />
-            </td>
-
-            <!-- Quick Action Icons -->
-            <td class="py-5 px-6 text-right align-top">
-              <div class="inline-flex items-center gap-2.5 text-stone-500">
-                <!-- Edit -->
-                <button type="button" @click="openEdit(item)" class="p-1 hover:text-stone-900 transition-colors"
-                  title="Edit item">
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                      d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                  </svg>
-                </button>
-                <!-- Duplicate -->
-                <button type="button" @click="duplicateItem(item.id)" class="p-1 hover:text-stone-900 transition-colors"
-                  title="Duplicate item">
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                      d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                </button>
-                <!-- Delete -->
-                <button type="button" @click="deleteItem(item.id)" class="p-1 hover:text-rose-600 transition-colors"
-                  title="Delete item">
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                  </svg>
-                </button>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
 import BaseToggle from '~/components/ui/BaseToggle.vue'
-import { useProducts } from '~/composables/useProducts'
+import type { InventoryItem } from '~/types/products'
 
-const { items, deleteItem, duplicateItem, openEdit } = useProducts()
+defineProps<{ items: InventoryItem[]; busy: boolean }>()
+const emit = defineEmits<{
+  edit: [item: InventoryItem]
+  duplicate: [item: InventoryItem]
+  stock: [item: InventoryItem]
+  delete: [item: InventoryItem]
+  status: [item: InventoryItem, active: boolean]
+}>()
+
+const usd = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
+const money = (cents: number) => usd.format(cents / 100)
+const margin = (item: InventoryItem) => (((item.priceCents - item.costCents) / item.priceCents) * 100).toFixed(2)
+
+function availability(item: InventoryItem) {
+  if (!item.stock) return item.type === 'service' ? 'No slots available' : 'Out of stock'
+  if (item.type === 'service') return `${item.stock} ${item.stock === 1 ? 'slot' : 'slots'} available`
+  return `${item.stock} ${item.stock === 1 ? 'unit' : 'units'} in stock`
+}
+
+const actions = [
+  { label: 'Edit', event: 'edit', icon: 'M13.5 6.5l4 4M4 20l4-.8L20 7.2a1.5 1.5 0 000-2.1l-1.1-1.1a1.5 1.5 0 00-2.1 0l-12 12L4 20z' },
+  { label: 'Duplicate', event: 'duplicate', icon: 'M8 16H5V4h11v3M9 8h10v12H9z' },
+  { label: 'Update stock for', event: 'stock', icon: 'M5 8a8 8 0 0113-2l2 2m0-5v5h-5M19 16a8 8 0 01-13 2l-2-2m0 5v-5h5' },
+  { label: 'Delete', event: 'delete', icon: 'M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 10v7m4-7v7' },
+] as const
+
+function act(action: (typeof actions)[number]['event'], item: InventoryItem) {
+  if (action === 'edit') emit('edit', item)
+  if (action === 'duplicate') emit('duplicate', item)
+  if (action === 'stock') emit('stock', item)
+  if (action === 'delete') emit('delete', item)
+}
 </script>
+
+<template>
+  <table class="catalog-table w-full text-left" role="table" aria-label="Inventory listings">
+    <thead role="rowgroup">
+      <tr role="row" class="bg-[#f5f6fd] text-[11px] font-semibold uppercase tracking-wide text-[#6b7280]">
+        <th scope="col" role="columnheader">Item</th>
+        <th scope="col" role="columnheader">Listing<br>Type</th>
+        <th scope="col" role="columnheader">Retail &amp;<br>Margin</th>
+        <th scope="col" role="columnheader">Stock /<br>Availability</th>
+        <th scope="col" role="columnheader" class="sm:text-center">Status</th>
+        <th scope="col" role="columnheader" class="sm:text-right">Actions</th>
+      </tr>
+    </thead>
+    <tbody role="rowgroup" class="divide-y divide-[#edf0ff]">
+      <tr v-for="item in items" :key="item.id" role="row" class="catalog-row">
+        <th scope="row" role="rowheader" class="item-cell font-normal">
+          <div class="flex min-w-0 items-center gap-3 sm:gap-4">
+            <div class="relative grid size-14 shrink-0 place-items-center overflow-hidden rounded-lg bg-[#e9edff] text-[#006398]">
+              <svg v-if="item.type === 'service'" aria-hidden="true" class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 21c-5 0-9-4.5-9-11 4 0 8 3 9 6 1-3 5-6 9-6 0 6.5-4 11-9 11Zm0 0c-3-5-3-12 0-17 3 5 3 12 0 17Z" />
+              </svg>
+              <svg v-else aria-hidden="true" class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+                <rect x="3" y="4" width="18" height="16" rx="2" />
+                <circle cx="8.5" cy="9" r="1.5" />
+                <path d="m5 18 5-5 3 3 3-4 3 4" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              <img
+                v-if="item.imageUrl"
+                :key="item.imageUrl"
+                :src="item.imageUrl"
+                alt=""
+                loading="lazy"
+                class="absolute inset-0 size-full object-cover"
+                @error="($event.target as HTMLImageElement).hidden = true"
+              />
+            </div>
+            <div class="min-w-0">
+              <p class="break-words text-base font-semibold leading-snug">{{ item.name }}</p>
+              <p class="mt-0.5 break-words text-xs text-[#6b7280]">{{ item.subtitle || item.category }}</p>
+            </div>
+          </div>
+        </th>
+        <td role="cell" class="type-cell text-[13px] text-[#584237]">
+          <span v-if="item.type === 'service'" class="rounded-md bg-[#e2f0ff] px-2 py-0.5 font-medium text-[#00476e]">Service</span>
+          <span v-else>Product</span>
+        </td>
+        <td role="cell" class="price-cell text-xs leading-[18px] text-[#6b7280]">
+          <span class="mobile-label">Retail &amp; Margin</span>
+          <p class="text-base font-semibold leading-6 text-[#141b2b]">{{ money(item.priceCents) }}</p>
+          <p>{{ margin(item) }}% margin</p>
+          <p class="text-[#6b7280]">({{ money(item.costCents) }} cost)</p>
+        </td>
+        <td role="cell" class="stock-cell text-sm">
+          <span class="mobile-label">Availability</span>
+          <div class="flex items-center gap-2" :class="{ 'text-[#ba1a1a]': item.stock <= 5 }">
+            <span
+              aria-hidden="true"
+              class="size-2 shrink-0 rounded-full"
+              :class="item.stock <= 5 ? 'bg-[#ef4444]' : item.type === 'service' ? 'bg-[#006398]' : 'bg-[#10b981]'"
+            />
+            <span>{{ availability(item) }}</span>
+          </div>
+        </td>
+        <td role="cell" class="status-cell sm:text-center">
+          <span class="mobile-label">Status</span>
+          <BaseToggle
+            :model-value="item.isActive"
+            :disabled="busy"
+            :aria-label="`Active listing for ${item.name}`"
+            :class="item.isActive ? '!bg-[#fdba74]' : ''"
+            class="align-middle focus-visible:ring-2 focus-visible:ring-[#006398] disabled:opacity-60"
+            @update:model-value="emit('status', item, $event)"
+          />
+          <span class="ml-2 text-xs text-[#6b7280] sm:sr-only">{{ item.isActive ? 'Active' : 'Inactive' }}</span>
+        </td>
+        <td role="cell" class="actions-cell sm:text-right">
+          <div class="inline-flex items-center gap-1 text-[#6b7280]">
+            <button
+              v-for="action in actions"
+              :key="action.event"
+              type="button"
+              class="grid size-9 place-items-center rounded-md transition enabled:hover:bg-[#f1f3ff] enabled:hover:text-[#141b2b] disabled:opacity-50 sm:size-8"
+              :class="{ 'enabled:hover:!text-[#ba1a1a]': action.event === 'delete' }"
+              :title="action.event === 'stock' ? 'Update stock' : action.label"
+              :aria-label="`${action.label} ${item.name}`"
+              :disabled="busy"
+              @click="act(action.event, item)"
+            >
+              <svg aria-hidden="true" class="size-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+                <path :d="action.icon" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</template>
+
+<style scoped>
+.mobile-label {
+  @apply mb-1 block text-[11px] font-semibold uppercase tracking-wide text-[#6b7280] sm:hidden;
+}
+
+@media (min-width: 640px) {
+  .catalog-table :is(th, td) {
+    @apply px-2.5;
+  }
+
+  .catalog-table :is(th, td):first-child {
+    @apply pl-5;
+  }
+
+  .catalog-table :is(th, td):last-child {
+    @apply pr-4;
+  }
+
+  .catalog-table thead th {
+    @apply py-3;
+  }
+
+  .catalog-table tbody :is(th, td) {
+    @apply py-4;
+  }
+
+  .catalog-table .item-cell { width: 46%; }
+  .catalog-table .price-cell { min-width: 6rem; }
+  .catalog-table .stock-cell { min-width: 6rem; }
+}
+
+@media (max-width: 639px) {
+  .catalog-table,
+  .catalog-table tbody { display: block; }
+
+  .catalog-table thead {
+    @apply sr-only;
+  }
+
+  .catalog-row {
+    @apply grid grid-cols-2 items-center gap-x-4 gap-y-3 p-4;
+  }
+
+  .item-cell { grid-column: span 2; }
+
+  .type-cell { grid-row: 2; grid-column: 2; justify-self: end; }
+
+  .price-cell { grid-row: 2 / span 2; }
+  .stock-cell { grid-row: 3; align-self: end; }
+  .actions-cell { justify-self: end; }
+}
+
+@media (min-width: 1280px) {
+  .catalog-row { height: 124px; }
+}
+</style>
