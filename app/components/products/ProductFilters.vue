@@ -1,86 +1,68 @@
+<script setup lang="ts">
+import type { ProductSort, StockFilter } from '~/types/products'
+
+defineProps<{ categories: string[] }>()
+const search = defineModel<string>('search', { required: true })
+const category = defineModel<string>('category', { required: true })
+const stock = defineModel<StockFilter>('stock', { required: true })
+const sort = defineModel<ProductSort>('sort', { required: true })
+</script>
+
 <template>
-  <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 pt-2">
-    <!-- Search Bar -->
-    <div class="relative flex-1 max-w-md">
-      <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-stone-500">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <circle cx="11" cy="11" r="8"/>
-          <path d="M21 21l-4.35-4.35"/>
-        </svg>
-      </div>
-      <input
-        type="text"
-        v-model="searchQuery"
-        placeholder="Search"
-        class="w-full pl-11 pr-4 py-2 rounded-xl bg-white border border-warm-200 text-stone-800 placeholder-stone-500 text-sm focus:outline-none focus:border-brand-500 shadow-sm"
-      />
-    </div>
+  <div class="flex flex-col justify-between gap-3 p-4 sm:p-5 xl:flex-row xl:items-center">
+    <label class="relative block flex-1">
+      <span class="sr-only">Search inventory</span>
+      <svg aria-hidden="true" class="pointer-events-none absolute left-3.5 top-1/2 size-[18px] -translate-y-1/2 text-[#6b7280]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <circle cx="10.5" cy="10.5" r="6.5" />
+        <path stroke-linecap="round" d="m16 16 4.5 4.5" />
+      </svg>
+      <input v-model="search" type="search" maxlength="160" placeholder="Search" class="catalog-control w-full py-2.5 pl-10 pr-3 placeholder:text-[#141b2b]" />
+    </label>
 
-    <!-- Filter Dropdowns -->
-    <div class="flex flex-wrap items-center gap-2.5">
-      <!-- Category Filter -->
-      <div class="relative">
-        <select
-          v-model="selectedCategory"
-          class="appearance-none pl-3 pr-8 py-2 rounded-xl bg-white border border-warm-200 text-sm font-semibold text-stone-800 hover:border-stone-400 focus:outline-none focus:border-brand-500 shadow-sm cursor-pointer"
-        >
-          <option value="all">All Categories</option>
-          <option value="balms">Topical Balms</option>
-          <option value="calming">Calming Oils</option>
-          <option value="wellness">Supplements</option>
-          <option value="services">Holistic Services</option>
+    <div class="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:gap-3">
+      <div class="catalog-select">
+        <select v-model="category" aria-label="Filter by category" class="catalog-control" :title="category || 'All Categories'">
+          <option value="">All Categories</option>
+          <option v-for="name in categories" :key="name" :value="name">{{ name }}</option>
         </select>
-        <div class="absolute inset-y-0 right-0 pr-2.5 flex items-center pointer-events-none text-stone-500">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-          </svg>
-        </div>
       </div>
 
-      <!-- Stock Filter -->
-      <div class="relative">
-        <select
-          v-model="selectedStock"
-          class="appearance-none pl-3 pr-8 py-2 rounded-xl bg-white border border-warm-200 text-sm font-semibold text-stone-800 hover:border-stone-400 focus:outline-none focus:border-brand-500 shadow-sm cursor-pointer"
-        >
+      <div class="catalog-select">
+        <select v-model="stock" aria-label="Stock availability" class="catalog-control">
           <option value="all">Stock: All Statuses</option>
-          <option value="in_stock">In Stock</option>
-          <option value="low_stock">Low Stock (≤ 5)</option>
+          <option value="in_stock">In Stock (&gt; 5)</option>
+          <option value="low_stock">Low Stock (1–5)</option>
           <option value="out_of_stock">Out of Stock</option>
         </select>
-        <div class="absolute inset-y-0 right-0 pr-2.5 flex items-center pointer-events-none text-stone-500">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-          </svg>
-        </div>
       </div>
 
-      <!-- Sort Filter -->
-      <div class="relative">
-        <select
-          v-model="selectedSort"
-          class="appearance-none pl-3 pr-8 py-2 rounded-xl bg-white border border-warm-200 text-sm font-semibold text-stone-800 hover:border-stone-400 focus:outline-none focus:border-brand-500 shadow-sm cursor-pointer"
-        >
+      <div class="catalog-select col-span-2">
+        <select v-model="sort" aria-label="Sort inventory" class="catalog-control">
           <option value="newest">Sort: Newest</option>
           <option value="price_asc">Price: Low to High</option>
           <option value="price_desc">Price: High to Low</option>
           <option value="stock">Highest Stock</option>
         </select>
-        <div class="absolute inset-y-0 right-0 pr-2.5 flex items-center pointer-events-none text-stone-500">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-          </svg>
-        </div>
       </div>
     </div>
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref } from 'vue'
+<style scoped>
+.catalog-control {
+  @apply rounded-lg bg-[#f8f9ff] text-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#006398] sm:bg-white sm:hover:bg-[#f7f8ff] sm:focus:bg-[#f1f3ff];
+}
 
-const searchQuery = ref('')
-const selectedCategory = ref('all')
-const selectedStock = ref('all')
-const selectedSort = ref('newest')
-</script>
+.catalog-select {
+  @apply relative min-w-0;
+}
+
+.catalog-select::after {
+  content: '';
+  @apply pointer-events-none absolute right-3.5 top-1/2 size-1.5 -translate-y-3/4 rotate-45 border-b border-r border-[#6b7280];
+}
+
+.catalog-select select {
+  @apply w-full cursor-pointer appearance-none truncate py-2.5 pl-2.5 pr-6 sm:w-40 sm:pl-3 sm:pr-8 sm:text-[13px];
+}
+</style>

@@ -42,6 +42,10 @@ const infoMessage = ref(
 )
 
 const isVendor = computed(() => activeRole.value === 'vendor')
+const inventorySignIn = computed(() => {
+  const redirect = route.query.redirect
+  return typeof redirect === 'string' && redirect.split(/[?#]/, 1)[0] === '/products'
+})
 
 const expectedApiRole = computed<Role>(() =>
   isVendor.value ? 'VENDOR' : 'CUSTOMER',
@@ -247,16 +251,14 @@ async function handleSubmit() {
             </button>
           </div>
 
-          <!-- Vendor Partner on Mobile/Tablet (<1024px): Desktop-Only Gate -->
-          <div v-if="isVendor" class="lg:hidden py-2">
+          <div v-if="isVendor && !inventorySignIn" class="lg:hidden py-2">
             <AuthVendorDesktopNotice
               show-switch-to-customer
               @switch-to-customer="switchRole('customer')"
             />
           </div>
 
-          <!-- Form Body (All viewports for Customer; Desktop >= 1024px only for Vendor) -->
-          <div :class="isVendor ? 'hidden lg:block' : 'block'">
+          <div :class="isVendor && !inventorySignIn ? 'hidden lg:block' : 'block'">
             <!-- Heading -->
             <div class="mb-5">
               <h1 class="text-2xl sm:text-[26px] font-bold tracking-tight text-stone-900">

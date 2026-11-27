@@ -1,46 +1,44 @@
+<script setup lang="ts">
+const props = defineProps<{ page: number; pageSize: number; total: number; count: number }>()
+const emit = defineEmits<{ change: [page: number] }>()
+const lastPage = computed(() => Math.max(1, Math.ceil(props.total / props.pageSize)))
+const pages = computed(() => {
+  const first = Math.max(1, Math.min(props.page - 1, lastPage.value - 2))
+  return Array.from({ length: Math.min(3, lastPage.value) }, (_, index) => first + index)
+})
+const firstItem = computed(() => (props.page - 1) * props.pageSize + 1)
+</script>
+
 <template>
-  <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-3 text-xs text-stone-600">
-    <div>
-      Showing <span class="font-bold text-stone-900">1-{{ items.length }}</span> of <span
-        class="font-bold text-stone-900">{{ 23 + items.length }}</span> items
-    </div>
-
-    <div class="flex items-center gap-1">
-      <button
-        class="w-7 h-7 rounded-lg flex items-center justify-center text-stone-500 hover:text-stone-800 hover:bg-white transition-colors"
-        disabled>
-        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+  <div class="flex flex-wrap items-center justify-between gap-3 px-5 py-4 text-xs text-[#6b7280]">
+    <p>Showing {{ firstItem }}–{{ firstItem + count - 1 }} of {{ total }} {{ total === 1 ? 'item' : 'items' }}</p>
+    <nav v-if="lastPage > 1" aria-label="Inventory pagination" class="flex items-center gap-1.5">
+      <button type="button" class="page-button" aria-label="Previous page" :disabled="page <= 1" @click="emit('change', page - 1)">
+        <svg aria-hidden="true" class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="m14 7-5 5 5 5" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
       </button>
-
       <button
-        class="w-7 h-7 rounded-lg bg-brand-100/80 text-brand-900 font-bold flex items-center justify-center text-xs shadow-sm">
-        1
-      </button>
-
-      <button
-        class="w-7 h-7 rounded-lg flex items-center justify-center text-stone-700 hover:bg-white hover:text-stone-950 font-medium transition-colors">
-        2
-      </button>
-
-      <button
-        class="w-7 h-7 rounded-lg flex items-center justify-center text-stone-700 hover:bg-white hover:text-stone-950 font-medium transition-colors">
-        3
-      </button>
-
-      <button
-        class="w-7 h-7 rounded-lg flex items-center justify-center text-stone-600 hover:text-stone-900 hover:bg-white transition-colors">
-        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+        v-for="number in pages"
+        :key="number"
+        type="button"
+        class="page-button"
+        :class="{ 'bg-[#fce8d3] font-bold text-[#9d4300]': number === page }"
+        :aria-label="`Page ${number}`"
+        :aria-current="number === page ? 'page' : undefined"
+        @click="number !== page && emit('change', number)"
+      >{{ number }}</button>
+      <button type="button" class="page-button" aria-label="Next page" :disabled="page >= lastPage" @click="emit('change', page + 1)">
+        <svg aria-hidden="true" class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="m10 7 5 5-5 5" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
       </button>
-    </div>
+    </nav>
   </div>
 </template>
 
-<script setup lang="ts">
-import { useProducts } from '~/composables/useProducts'
-
-const { items } = useProducts()
-</script>
+<style scoped>
+.page-button {
+  @apply grid size-8 place-items-center rounded-md text-[13px] enabled:hover:bg-[#f1f3ff] disabled:opacity-40;
+}
+</style>

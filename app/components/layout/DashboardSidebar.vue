@@ -113,7 +113,7 @@
     <!-- Bottom: Storefront Profile Link -->
     <div class="pt-4 mt-auto border-t border-warm-200/80">
       <NuxtLink
-        to="/vendors/velvet-paws"
+        :to="storefrontLink || '/vendors/velvet-paws'"
         class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl border border-[#D0E6FF] bg-white hover:bg-[#F0F7FF] text-[#1D68E2] text-xs font-bold transition-all group shadow-xs"
       >
         <span class="flex items-center gap-2 min-w-0">
@@ -131,5 +131,6 @@
 </template>
 
 <script setup lang="ts">
+defineProps<{ storefrontLink?: string }>()
 const route = useRoute()
 </script>
